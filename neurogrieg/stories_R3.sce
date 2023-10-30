@@ -24,7 +24,7 @@ TEMPLATE "./stories/trials.tem";
 begin_pcl;
 
 string condition = parameter_manager.get_string("Group");
-string stimulus_file = "./stories/stimuli/stories_R1_" + condition + ".txt";
+string stimulus_file = "./stories/stimuli/stories_R3_" + condition + ".txt";
 
 wait_for_scanner_trial.present();
 include "./stories/core.pcl"
