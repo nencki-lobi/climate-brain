@@ -7,22 +7,21 @@ int BTN_SUBMIT = 3;
 
 # Scale properties
 double sc_width = 1000;
-double sc_increment = 0.01;
-rgb_color sc_bg_color = rgb_color( 255,255,255 );
-array<int> sc_range[2] = { 0,100 };
-int sc_init_pos = 50;
+double sc_increment = 0.1; # 0.01
+rgb_color sc_bg_color = rgb_color( 128,128,128 );
+array<int> sc_range[2] = { 0,10 }; # 0,100
+int sc_init_pos = 5; # 50
 array<int> resp_position[] = { 0, -30 };
 array<int> prompt_position[] = { 0, 200 };
 
-
 # Prompt properties
-rgb_color prompt_color = rgb_color( 0,0,0 );
+rgb_color prompt_color = rgb_color( 255,255,255 );
 int prompt_font_size = 24;
 
 # Response properties
-rgb_color scale_color = rgb_color( 0, 0, 0 );
+rgb_color scale_color = rgb_color( 255, 255, 255 );
 rgb_color cursor_color = rgb_color( 255, 0, 0 );
-rgb_color tick_color = rgb_color( 0, 0, 0 );
+rgb_color tick_color = rgb_color( 255, 255, 255 );
 int sc_line_width = 5;
 int tick_ct = 2; 
 int tick_height = 50;
@@ -101,11 +100,12 @@ begin
     scale_pic.add_part( cursor_box, cursor_x, resp_position[2] );
 end;
 
-# --- sub do_scale
+# --- sub get_scale_response
 
 sub
-    double get_scale_response( string prompt, array<string,1> bot_prompts, string event_code )
+    double get_scale_response( string prompt, array<string,1> bot_prompts, string event_code, int duration )
 begin
+
     # Draw scale graphics
     build_scale( prompt, bot_prompts );
     
@@ -120,23 +120,31 @@ begin
     int submit_time = 0;
     double scale_resp = 0.0;
 
+     bool timeout = false;
+
     # Loop to collect response
     loop
         double curr_scale_pct = double( sc_init_pos - sc_range[1] ) / double( sc_range[2] - sc_range[1] );
-        bool submitted = false
+          double end_time = clock.time( ) + duration;
     until
-        submitted
+        clock.time( ) > end_time
     begin
+        
         # Update resp
         scale_resp = ( double( sc_range[2] - sc_range[1] ) * curr_scale_pct ) + sc_range[1];
         term.print_line( scale_resp );
         
         # Wait for a response
-        loop 
-            int resp_ct = response_manager.total_response_count()
+          int resp_ct = response_manager.total_response_count();
+        
+        loop
         until
-            response_manager.total_response_count() > resp_ct 
+            ( response_manager.total_response_count() > resp_ct ) || timeout
         begin
+                # Control time
+                if clock.time( ) > end_time then
+                    timeout = true;
+                end;
         end;
         
         # Get this last resp
@@ -148,7 +156,7 @@ begin
             break;
         end;
         
-        # IF not submitted, update cursor position
+        # If not submitted, update cursor position
         if ( last_resp.button() == BTN_LEFT ) then
             curr_scale_pct = curr_scale_pct - sc_increment;
             if ( curr_scale_pct < 0 ) then
@@ -165,9 +173,28 @@ begin
         double cursor_x = ( -sc_width * 0.5 ) + ( sc_width * curr_scale_pct );
         scale_pic.set_part_x( scale_pic.part_count(), cursor_x );
         scale_pic.present();
+    
+    end;
+
+    # If no response, print warning
+    if response_manager.response_count() == 0 then
+        string button_warning = "Button count 0!";
+      term.print_line( button_warning );
+    end;
+
+     # If timeout, print warning
+    if timeout then
+        string timeout_warning = "Timeout!";
+      term.print_line( timeout_warning );
     end;
     
     # Logging submission
-    logfile.add_event_entry( "Scale Response: " + string( scale_resp ) );
+
+     if scale_resp == sc_init_pos && response_manager.response_count() == 0 then
+        logfile.add_event_entry( event_code + " Response: none" );
+     else
+        logfile.add_event_entry( event_code + " Response: " + string( scale_resp ) );
+     end;
+
     return scale_resp
 end;

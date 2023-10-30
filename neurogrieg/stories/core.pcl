@@ -35,9 +35,9 @@ begin
 	main_trial.present();
 	
 	# Display rating scales
-	double val_scale = get_scale_response( val_top_prompt, val_bottom_prompts, "Valence" );
+	double val_scale = get_scale_response( val_top_prompt, val_bottom_prompts, "Valence", 5000 );
 	empty_trial.present();
-	double aro_scale = get_scale_response( aro_top_prompt, aro_bottom_prompts, "Arousal" );
+	double aro_scale = get_scale_response( aro_top_prompt, aro_bottom_prompts, "Arousal", 5000 );
 	empty_trial.present();
 	
 	# Prepare for the next trial
