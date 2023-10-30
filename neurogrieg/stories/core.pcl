@@ -1,3 +1,12 @@
+# Rating scales
+
+include "./ratings.pcl"
+
+array<string> val_bottom_prompts[] = { "negatywne", "pozytywne" };
+string val_top_prompt = "Oceń swoje emocje:";
+array<string> aro_bottom_prompts[] = { "niskie", "wysokie" };
+string aro_top_prompt = "Oceń swoje pobudzenie:";
+
 # Stimuli
 
 input_file stories_file = new input_file;
@@ -24,6 +33,12 @@ begin
 	# Display trial
 	main_trial.set_start_delay(stories_file.get_int()); # jitter
 	main_trial.present();
+	
+	# Display rating scales
+	double val_scale = get_scale_response( val_top_prompt, val_bottom_prompts, "Valence" );
+	empty_trial.present();
+	double aro_scale = get_scale_response( aro_top_prompt, aro_bottom_prompts, "Arousal" );
+	empty_trial.present();
 	
 	# Prepare for the next trial
 	story = stories_file.get_line();

@@ -66,6 +66,19 @@ trial{
 } main_trial;
 
 trial {
+	stimulus_event {
+		picture {} scale_pic;
+	} scale_event;
+} scale_trial; # used by `ratings.pcl` --- duration changed in the `get_scale_response()` call
+
+trial {
+	stimulus_event {
+      picture {};
+		duration = 500;
+   };
+} empty_trial;
+
+trial {
 	trial_duration = 3000;
 	stimulus_event {
 		picture the_end_pic;

@@ -1,0 +1,173 @@
+# --- Source: https://www.neurobs.com/menu_support/menu_forums/view_thread?id=11270
+
+# Some setup values
+int BTN_LEFT = 1;
+int BTN_RIGHT = 2;
+int BTN_SUBMIT = 3;
+
+# Scale properties
+double sc_width = 1000;
+double sc_increment = 0.01;
+rgb_color sc_bg_color = rgb_color( 255,255,255 );
+array<int> sc_range[2] = { 0,100 };
+int sc_init_pos = 50;
+array<int> resp_position[] = { 0, -30 };
+array<int> prompt_position[] = { 0, 200 };
+
+
+# Prompt properties
+rgb_color prompt_color = rgb_color( 0,0,0 );
+int prompt_font_size = 24;
+
+# Response properties
+rgb_color scale_color = rgb_color( 0, 0, 0 );
+rgb_color cursor_color = rgb_color( 255, 0, 0 );
+rgb_color tick_color = rgb_color( 0, 0, 0 );
+int sc_line_width = 5;
+int tick_ct = 2; 
+int tick_height = 50;
+int sc_cursor_width = 10;
+int sc_cursor_height = 80;
+if ( tick_ct < 2 ) then
+    exit( "Error: 'tick_ct' must be at least 2" );
+end;
+
+# --- sub build_scale 
+
+text prompt_text = new text;
+prompt_text.set_font_size( prompt_font_size );
+prompt_text.set_font_color( prompt_color );
+prompt_text.set_max_text_width( sc_width );
+prompt_text.set_background_color( sc_bg_color );
+
+box scale_box = new box( sc_line_width, sc_width, scale_color );
+box tick_box = new box( tick_height, sc_line_width, tick_color );
+box cursor_box = new box( sc_cursor_height, sc_cursor_width, cursor_color );
+
+array<text> tick_label_texts[0];
+
+sub
+    build_scale( string prompt, array<string,1> bot_prompts )
+begin
+    scale_pic.clear();
+    prompt_text.set_caption( prompt, true );
+    
+    scale_pic.set_background_color( sc_bg_color );
+    scale_pic.add_part( scale_box, resp_position[1], resp_position[2] );
+    scale_pic.add_part( prompt_text, prompt_position[1], prompt_position[2] );
+    
+    # Add ticks
+    loop
+        double tick_inc = sc_width / ( tick_ct - 1 );
+        double x = -sc_width * 0.5;
+        int tick = 1
+    until
+        tick > tick_ct
+    begin
+        scale_pic.add_part( tick_box, x, resp_position[2] );
+        x = x + tick_inc;
+        tick = tick + 1;
+    end;
+    
+    # Add labels
+    tick_label_texts.resize( 0 );
+    loop
+        int prompt_ct = bot_prompts.count();
+        double prompt_inc = sc_width / double( prompt_ct - 1 );
+        double x = -sc_width * 0.5;
+        int i = 1;
+    until
+        i > prompt_ct
+    begin
+        text t = new text;
+        t.set_font_size( prompt_font_size );
+        t.set_font_color( prompt_color );
+        t.set_max_text_width( prompt_inc );
+        t.set_background_color( sc_bg_color );
+        t.set_caption( bot_prompts[i], true );
+        tick_label_texts.add( t );
+
+        scale_pic.add_part( tick_label_texts[i], x, resp_position[2] - ( tick_height ) - ( t.height() * 0.5 ) );
+        x = x + prompt_inc;
+        i = i + 1;
+    end;
+        
+    if ( sc_init_pos < sc_range[1] ) || ( sc_init_pos > sc_range[2] ) || ( sc_range[1] >= sc_range[2] ) then
+        exit( "Error: Check values for sc_init_pos and sc_range." );
+    end;
+    double init_pct = double( sc_init_pos - sc_range[1] ) / double( sc_range[2] - sc_range[1] );
+    double cursor_x = ( -sc_width * 0.5 ) + ( sc_width * init_pct );
+    scale_pic.add_part( prompt_text, prompt_position[1], prompt_position[2] );
+    scale_pic.add_part( cursor_box, cursor_x, resp_position[2] );
+end;
+
+# --- sub do_scale
+
+sub
+    double get_scale_response( string prompt, array<string,1> bot_prompts, string event_code )
+begin
+    # Draw scale graphics
+    build_scale( prompt, bot_prompts );
+    
+    # Update event code
+    scale_event.set_event_code( event_code );
+    
+    # Present scale and log onset time
+    scale_trial.present();
+    int start_time = stimulus_manager.last_stimulus_data().time();
+    
+    # Some values to report later
+    int submit_time = 0;
+    double scale_resp = 0.0;
+
+    # Loop to collect response
+    loop
+        double curr_scale_pct = double( sc_init_pos - sc_range[1] ) / double( sc_range[2] - sc_range[1] );
+        bool submitted = false
+    until
+        submitted
+    begin
+        # Update resp
+        scale_resp = ( double( sc_range[2] - sc_range[1] ) * curr_scale_pct ) + sc_range[1];
+        term.print_line( scale_resp );
+        
+        # Wait for a response
+        loop 
+            int resp_ct = response_manager.total_response_count()
+        until
+            response_manager.total_response_count() > resp_ct 
+        begin
+        end;
+        
+        # Get this last resp
+        response_data last_resp = response_manager.last_response_data();
+        
+        # If submitted, then move on
+        if ( last_resp.button() == BTN_SUBMIT ) then
+            submit_time = last_resp.time();
+            break;
+        end;
+        
+        # IF not submitted, update cursor position
+        if ( last_resp.button() == BTN_LEFT ) then
+            curr_scale_pct = curr_scale_pct - sc_increment;
+            if ( curr_scale_pct < 0 ) then
+                curr_scale_pct = 0;
+            end;
+        elseif ( last_resp.button() == BTN_RIGHT ) then
+            curr_scale_pct = curr_scale_pct + sc_increment;
+            if ( curr_scale_pct > 1.0 ) then
+                curr_scale_pct = 1.0;
+            end;
+        end;
+        
+        # Now get new cursor position and transformed (within-range) value.
+        double cursor_x = ( -sc_width * 0.5 ) + ( sc_width * curr_scale_pct );
+        scale_pic.set_part_x( scale_pic.part_count(), cursor_x );
+        scale_pic.present();
+    end;
+    
+    # Logging submission
+    logfile.add_event_entry( "Scale Response: " + string( scale_resp ) );
+    return scale_resp
+end;
