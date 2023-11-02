@@ -1,0 +1,80 @@
+### SDL part
+
+picture {
+	text {
+		caption = "Czekam na sygnał skanera...";
+		font_color = 250, 243, 240;
+		font_size = 36;
+	};
+	x = 0; y = 0;
+} wait_for_scanner;
+
+picture {
+	text {
+		caption = "+";
+	font_color = 250, 243, 240; 
+	};
+	x = 0; y = 0;
+} fix_pic;
+
+picture {
+   /*highlight response */
+   box {
+    height = 600;
+    width = 800;
+    color = 90, 169, 230; } resp_l;
+   x = -450; y = -50;
+   box {
+    height = 600;
+    width = 800;
+    color = 90, 169, 230; } resp_r;
+   x = 450; y = -50;
+
+	#title and boxes
+	box { color = 250, 243, 240; height = 500; width = 800; } box_l;
+	x = -450; y = -50;
+	box { color = 250, 243, 240; height = 500; width = 800; } box_p;
+	x = 450; y = -50;
+	text	{
+			caption = "title";
+			font_color = 250, 243, 240;
+			} title_txt;
+			x=0; y=400;
+			
+	#options
+	text {
+			caption = "left";
+			background_color = 250, 243, 240;
+			max_text_width = 500;
+			} left_txt;
+			x=-450; y=0;
+	text {
+			caption = "right";
+			background_color = 250, 243, 240;
+			max_text_width = 500;
+			} right_txt;
+			x=450; y=0;
+
+} choice;
+
+trial {
+	picture wait_for_scanner;
+	nothing{};
+	time = 0;
+	mri_pulse = 1;
+} wait_for_scanner_trial;
+
+trial{
+	stimulus_event {
+		picture fix_pic;
+		time = 0;
+		duration = 3000;
+	} fix_event;
+} fix_trial;
+
+trial {
+	stimulus_event {
+		picture choice;
+		code="trial";
+		} cet_event;
+} cet_trial;
