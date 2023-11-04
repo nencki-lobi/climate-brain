@@ -1,5 +1,5 @@
-<ver>24</ver>
-<efn>.\neurogrieg\neurogrieg.exp</efn>
+﻿<ver>24</ver>
+<efn>./neurogrieg.exp</efn>
 <author></author>
 <con>
 <pause>P</pause>
@@ -45,13 +45,13 @@
 <dwm>0</dwm>
 <dxv>8</dxv>
 <efs>
-<filename>.\neurogrieg\stories_training.sce</filename>
-<filename>.\neurogrieg\stories_R1.sce</filename>
-<filename>.\neurogrieg\stories_R2.sce</filename>
-<filename>.\neurogrieg\stories_R3.sce</filename>
-<filename>.\neurogrieg\stories\core.pcl</filename>
-<filename>.\neurogrieg\stories\ratings.pcl</filename>
-<filename>.\neurogrieg\stories\trials.tem</filename>
+<filename>./stories_training.sce</filename>
+<filename>./stories_R1.sce</filename>
+<filename>./stories_R2.sce</filename>
+<filename>./stories_R3.sce</filename>
+<filename>./stories/core.pcl</filename>
+<filename>./stories/ratings.pcl</filename>
+<filename>./stories/trials.tem</filename>
 </efs>
 <exclusive_mouse>1</exclusive_mouse>
 <exp_version></exp_version>
@@ -162,7 +162,7 @@
 <idt>0</idt>
 <ilc>0</ilc>
 <ip_chans></ip_chans>
-<lfd>.\neurogrieg\logs</lfd>
+<lfd>./logs</lfd>
 <lnb>0</lnb>
 <lno>4</lno>
 <log>
@@ -714,7 +714,7 @@
 <unique_id>1</unique_id>
 </idv>
 <overrides></overrides>
-<sfn>.\neurogrieg\stories_training.sce</sfn>
+<sfn>./stories_training.sce</sfn>
 </sce>
 <sce>
 <idv>
@@ -732,7 +732,7 @@
 <unique_id>1</unique_id>
 </idv>
 <overrides></overrides>
-<sfn>.\neurogrieg\stories_R1.sce</sfn>
+<sfn>./stories_R1.sce</sfn>
 </sce>
 <sce>
 <idv>
@@ -750,7 +750,7 @@
 <unique_id>1</unique_id>
 </idv>
 <overrides></overrides>
-<sfn>.\neurogrieg\stories_R2.sce</sfn>
+<sfn>./stories_R2.sce</sfn>
 </sce>
 <sce>
 <idv>
@@ -768,7 +768,7 @@
 <unique_id>1</unique_id>
 </idv>
 <overrides></overrides>
-<sfn>.\neurogrieg\stories_R3.sce</sfn>
+<sfn>./stories_R3.sce</sfn>
 </sce>
 <sct>
 <capture_device>
