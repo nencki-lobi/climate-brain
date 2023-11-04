@@ -13,7 +13,7 @@ default_font_size = 96;
 
 begin;
 
-TEMPLATE "./stories/trials.tem";
+TEMPLATE "./stories/stories.tem";
 
 picture {
 	text {
@@ -89,4 +89,4 @@ begin_pcl;
 string stimulus_file = "./stories/stimuli/stories_training.txt";
 
 instruction_trial.present();
-include "./stories/core.pcl"
+include "./stories/stories.pcl"

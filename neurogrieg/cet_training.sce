@@ -26,7 +26,7 @@ TEMPLATE "./cet/cet.tem";
 begin_pcl;
 
 input_file cet_file = new input_file;
-cet_file.open("./cet/stimuli/cet_tutorial.txt");
+cet_file.open("./cet/stimuli/cet_training.txt");
 cet_file.set_delimiter('\t');
 
 wait_for_scanner_trial.present();

@@ -17,7 +17,7 @@ default_font_size = 96;
 
 begin;
 
-TEMPLATE "./stories/trials.tem";
+TEMPLATE "./stories/stories.tem";
 
 # PCL part
 
@@ -27,4 +27,4 @@ string condition = parameter_manager.get_string("Group");
 string stimulus_file = "./stories/stimuli/stories_R2_" + condition + ".txt";
 
 wait_for_scanner_trial.present();
-include "./stories/core.pcl"
+include "./stories/stories.pcl"
