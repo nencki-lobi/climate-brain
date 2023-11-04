@@ -1,13 +1,5 @@
-# PCL part
+# Custom log file
 
-# highlight response
-double begin_time;
-double end_time;
-int conf;
-int confirmation_left;
-int confirmation_right;
-
-# output for responses
 output_file out = new output_file;
 string results_file = logfile.subject();
 results_file.append("-cet");
@@ -15,20 +7,29 @@ results_file.append(date_time("_d_m_yy_h_nn"));
 results_file.append(".txt.");
 out.open( results_file );  
 
+# Stimuli
+
 string title = cet_file.get_line();
 string left = cet_file.get_line();
 string right = cet_file.get_line();
 string cet_code = cet_file.get_string();
 bool is_choice = cet_file.last_succeeded();
 
+# Begin procedure
+
+double end_time;
+int conf;
+int confirmation_left;
+int confirmation_right;
+
 loop
 until
-	! is_choice
+	!is_choice
 begin
 	
 	fix_trial.present();
 	
-	# Set texts & colours
+	# Set CET trial to be displayed
 	title_txt.set_caption(title);
 	title_txt.redraw();
 	left_txt.set_caption(left);
@@ -41,18 +42,18 @@ begin
 	# Set event code
 	cet_event.set_event_code(cet_code);
 	
-	# Display trial & highlight response
-	cet_trial.present();
-	end_time = clock.time() + 10000; #trial duration
-	choice.present();
-	cet_trial.present();
-	conf=0;
+	# Display trial & record information in the custom log
+
+	conf = 0;
 	confirmation_left = response_manager.response_count(1);
 	confirmation_right = response_manager.response_count(2);
-	begin_time = clock.time();
+
+	end_time = clock.time() + 10000; # trial duration
+	cet_trial.present();
+	
 	loop until clock.time() > end_time
 	begin
-		if response_manager.response_count( 1 )> confirmation_left && conf == 0 then
+		if response_manager.response_count(1) > confirmation_left && conf == 0 then
 			conf = 1;
 			resp_l.set_color(90, 169, 230);
 			out.print("HIT: ");
@@ -70,13 +71,12 @@ begin
 		choice.present();
 	end;
 	
-	if response_manager.response_count()==0 then
+	if response_manager.response_count() == 0 then
 		out.print("MISS: ");
 		out.print(left);
 		out.print(" / ");
 		out.print_line(right);
 	end;
-	
 	
 	# Prepare for the next trial
 	title = cet_file.get_line();

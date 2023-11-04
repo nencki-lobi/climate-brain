@@ -1,4 +1,4 @@
-### SDL part
+## Simple objects
 
 picture {
 	text {
@@ -18,7 +18,9 @@ picture {
 } fix_pic;
 
 picture {
-   /*highlight response */
+   
+   # Response highlight
+
    box {
     height = 600;
     width = 800;
@@ -30,10 +32,11 @@ picture {
     color = 90, 169, 230; } resp_r;
    x = 450; y = -50;
 
-	#title and boxes
+	# Title and boxes
+
 	box { color = 250, 243, 240; height = 500; width = 800; } box_l;
 	x = -450; y = -50;
-	box { color = 250, 243, 240; height = 500; width = 800; } box_p;
+	box { color = 250, 243, 240; height = 500; width = 800; } box_r;
 	x = 450; y = -50;
 	text	{
 			caption = "title";
@@ -41,7 +44,8 @@ picture {
 			} title_txt;
 			x=0; y=400;
 			
-	#options
+	# Options
+
 	text {
 			caption = "left";
 			background_color = 250, 243, 240;
@@ -57,8 +61,11 @@ picture {
 
 } choice;
 
+## Trial objects
+
 trial {
 	picture wait_for_scanner;
+
 	nothing{};
 	time = 0;
 	mri_pulse = 1;
@@ -75,6 +82,6 @@ trial{
 trial {
 	stimulus_event {
 		picture choice;
-		code="trial";
+		code = "trial";
 		} cet_event;
 } cet_trial;
