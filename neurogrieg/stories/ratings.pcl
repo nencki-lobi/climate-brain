@@ -8,20 +8,20 @@ int BTN_SUBMIT = 3;
 # Scale properties
 double sc_width = 1000;
 double sc_increment = 0.1; # 0.01
-rgb_color sc_bg_color = rgb_color( 128,128,128 );
+rgb_color sc_bg_color = rgb_color( 68, 81, 95 );
 array<int> sc_range[2] = { 0,10 }; # 0,100
 int sc_init_pos = 5; # 50
 array<int> resp_position[] = { 0, -30 };
 array<int> prompt_position[] = { 0, 200 };
 
 # Prompt properties
-rgb_color prompt_color = rgb_color( 255,255,255 );
+rgb_color prompt_color = rgb_color( 250, 243, 240 );
 int prompt_font_size = 24;
 
 # Response properties
-rgb_color scale_color = rgb_color( 255, 255, 255 );
-rgb_color cursor_color = rgb_color( 255, 0, 0 );
-rgb_color tick_color = rgb_color( 255, 255, 255 );
+rgb_color scale_color = rgb_color( 250, 243, 240 );
+rgb_color cursor_color = rgb_color( 90, 169, 230 );
+rgb_color tick_color = rgb_color( 250, 243, 240 );
 int sc_line_width = 5;
 int tick_ct = 2; 
 int tick_height = 50;

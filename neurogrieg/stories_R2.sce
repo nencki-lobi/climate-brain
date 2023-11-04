@@ -10,8 +10,10 @@ response_matching = simple_matching;
 active_buttons = 2;
 button_codes = 11,12;
 
-default_background_color = 128,128,128;
+default_background_color = 68, 81, 95;
+default_text_color = 250, 243, 240;
 default_font_size = 96;
+default_font = "Helvetica";
 
 ### SDL part
 
