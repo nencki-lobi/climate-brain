@@ -1,16 +1,15 @@
 ## Simple objects
 
 picture {
-	text {
-		caption = "Czekam na sygnał skanera...";
-		font_size = 36;
-	};
-	x = 0; y = 0;
+	text {caption = "Wersja procedury:"; }; x = 0; y = 100;
+	text {caption = EXPARAM( "Group" ); }; x = 0; y = 50;
+	text {caption = "Czekam na sygnał skanera..."; }; x = 0; y = -50;
 } wait_for_scanner;
 
 picture {
 	text {
-		caption = "+"; 
+		caption = "+";
+		font_size = 96;
 	};
 	x = 0; y = 0;
 } fix_pic;
@@ -18,7 +17,6 @@ picture {
 picture {
 	text{
 		caption = "This is going to be replaced by a story...";
-		font_size = 36;
 		max_text_width = 1500; 
 		max_text_height = 700;
 	} story_txt; # updated in `core.pcl`
@@ -28,7 +26,6 @@ picture {
 picture {
 	text {
 		caption = "Koniec!";
-		font_size = 36;
 	};
 	x = 0; y = 0;
 } the_end_pic;
@@ -60,7 +57,7 @@ trial{
 	stimulus_event {
 		picture fix_pic;
 		time = 15500;
-		duration = 500;
+		duration = 2000;
 	};
 
 } main_trial;

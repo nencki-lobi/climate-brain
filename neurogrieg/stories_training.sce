@@ -8,7 +8,7 @@ button_codes = 11,12;
 
 default_background_color = 68, 81, 95;
 default_text_color = 250, 243, 240;
-default_font_size = 96;
+default_font_size = 36;
 default_font = "Helvetica";
 
 ### SDL part
@@ -21,7 +21,6 @@ picture {
 	text {
 		caption = "Za chwilę przeczytasz kilka historii, opisujących różne sytuacje. Wszystkie historie oparte są na prawdziwych zdarzeniach i powstały na podstawie wypowiedzi osób, które zgodziły się opowiedzieć nam o swoich doświadczeniach.
 \n Twoim zadaniem będzie czytanie historii, a następnie ocenianie nasilenia własnych emocji.";
-		font_size = 36;
 		max_text_width = 1500; 
 		max_text_height = 700;
 	};
@@ -34,7 +33,6 @@ picture {
 - Czy opisana sytuacja budzi w Tobie raczej negatywne, czy pozytywne emocje?
 - W jakim stopniu opisana sytuacja pobudza Cię emocjonalnie? Czy czujesz zupełny brak pobudzenia, czy też silne pobudzenie, wzburzenie lub ekscytację?
 \n Zwóć szczególną uwagę na emocje, które czujesz po przeczytaniu danej historii.";
-		font_size = 36;
 		max_text_width = 1500; 
 		max_text_height = 700;
 	};
@@ -45,7 +43,6 @@ picture {
 	text {
 		caption = "Odpowiedzi będziesz udzielać za pomocą dwóch guzików, znajdujących się na trzymanym przez Ciebie urządzeniu. Lewy guzik będzie służył zmianie odpowiedzi w lewo, a prawy - w prawo. 
 \n Na udzielenie odpowiedzi będziesz mieć zawsze tyle samo czasu, tj. 5 sekund na każde z pytań. Po upływie tego czasu, Twoja odpowiedź zostanie zapisana i nastąpi przejście do kolejnego ekranu.";
-		font_size = 36;
 		max_text_width = 1500; 
 		max_text_height = 700;
 	};
@@ -57,7 +54,6 @@ picture {
 		caption = "Pamiętaj, że kolejne ekrany będą wyświetlać się i znikać automatycznie. Guziki na urządzeniu NIE służą zmianie ekranu.
 \n Udzielając odpowiedzi, staraj się wykorzystywać cały zakres skali ocen. Nie ma dobrych, ani złych odpowiedzi, odpowiadaj zgodnie z pierwszym skojarzeniem.
 \n Na początek weźmiesz udział w krótkiej sesji treningowej.";
-		font_size = 36;
 		max_text_width = 1500; 
 		max_text_height = 700;
 	};
