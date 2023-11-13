@@ -1,0 +1,13 @@
+﻿
+trial {
+		trial_type = first_response;
+		trial_duration = forever;
+
+		#stimulus_event{
+		picture {
+				bitmap {filename = $PIC;}; x = 0; y = 0;
+				};
+		target_button = 1;
+		code = $CODE;
+		#};
+}$TRIAL_NAME;
