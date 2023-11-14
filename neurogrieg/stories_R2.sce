@@ -28,5 +28,6 @@ begin_pcl;
 string condition = parameter_manager.get_string("Group");
 string stimulus_file = "./stories/stimuli/stories_R2_" + condition + ".txt";
 
+version_trial.present();
 wait_for_scanner_trial.present();
 include "./stories/stories.pcl"
