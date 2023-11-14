@@ -19,13 +19,22 @@ TEMPLATE "./stories/stories.tem";
 
 picture {
 	text {
+		caption = "Czy ten tekst wyświetla się wyraźnie?";
+		max_text_width = 1500; 
+		max_text_height = 700;
+	};
+	x = 0; y = 0;
+} instruction1;
+
+picture {
+	text {
 		caption = "Za chwilę przeczytasz kilka historii, opisujących różne sytuacje. Wszystkie historie oparte są na prawdziwych zdarzeniach i powstały na podstawie wypowiedzi osób, które zgodziły się opowiedzieć nam o swoich doświadczeniach.
 \n Twoim zadaniem będzie czytanie historii, a następnie ocenianie nasilenia własnych emocji.";
 		max_text_width = 1500; 
 		max_text_height = 700;
 	};
 	x = 0; y = 0;
-} instruction1;
+} instruction2;
 
 picture {
 	text {
@@ -37,7 +46,7 @@ picture {
 		max_text_height = 700;
 	};
 	x = 0; y = 0;
-} instruction2;
+} instruction3;
 
 picture {
 	text {
@@ -47,7 +56,7 @@ picture {
 		max_text_height = 700;
 	};
 	x = 0; y = 0;
-} instruction3;
+} instruction4;
 
 picture {
 	text {
@@ -58,7 +67,7 @@ picture {
 		max_text_height = 700;
 	};
 	x = 0; y = 0;
-} instruction4;
+} instruction5;
 
 trial {
 	
@@ -78,6 +87,10 @@ trial {
 	deltat = 0; # show as soon as instruction3 is done
 	duration = response;
    
+	picture instruction5;
+	deltat = 0; # show as soon as instruction4 is done
+	duration = response;
+	
 } instruction_trial;
 
 # PCL part
