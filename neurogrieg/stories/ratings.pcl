@@ -46,142 +46,142 @@ box cursor_box = new box( sc_cursor_height, sc_cursor_width, cursor_color );
 array<text> tick_label_texts[0];
 
 sub
-    build_scale( string prompt, array<string,1> bot_prompts )
+	build_scale( string prompt, array<string,1> bot_prompts )
 begin
-    scale_pic.clear();
-    prompt_text.set_caption( prompt, true );
-    
-    scale_pic.set_background_color( sc_bg_color );
-    scale_pic.add_part( scale_box, resp_position[1], resp_position[2] );
-    scale_pic.add_part( prompt_text, prompt_position[1], prompt_position[2] );
-    
-    # Add ticks
-    loop
-        double tick_inc = sc_width / ( tick_ct - 1 );
-        double x = -sc_width * 0.5;
-        int tick = 1
-    until
-        tick > tick_ct
-    begin
-        scale_pic.add_part( tick_box, x, resp_position[2] );
-        x = x + tick_inc;
-        tick = tick + 1;
-    end;
-    
-    # Add labels
-    tick_label_texts.resize( 0 );
-    loop
-        int prompt_ct = bot_prompts.count();
-        double prompt_inc = sc_width / double( prompt_ct - 1 );
-        double x = -sc_width * 0.5;
-        int i = 1;
-    until
-        i > prompt_ct
-    begin
-        text t = new text;
-        t.set_font_size( prompt_font_size );
-        t.set_font_color( prompt_color );
-        t.set_max_text_width( prompt_inc );
-        t.set_background_color( sc_bg_color );
-        t.set_caption( bot_prompts[i], true );
-        tick_label_texts.add( t );
+	scale_pic.clear();
+	prompt_text.set_caption( prompt, true );
 
-        scale_pic.add_part( tick_label_texts[i], x, resp_position[2] - ( tick_height ) - ( t.height() * 0.5 ) );
-        x = x + prompt_inc;
-        i = i + 1;
-    end;
+	scale_pic.set_background_color( sc_bg_color );
+	scale_pic.add_part( scale_box, resp_position[1], resp_position[2] );
+	scale_pic.add_part( prompt_text, prompt_position[1], prompt_position[2] );
+    
+	# Add ticks
+	loop
+		double tick_inc = sc_width / ( tick_ct - 1 );
+		double x = -sc_width * 0.5;
+		int tick = 1
+	until
+		tick > tick_ct
+	begin
+		scale_pic.add_part( tick_box, x, resp_position[2] );
+		x = x + tick_inc;
+		tick = tick + 1;
+	end;
+    
+	# Add labels
+	tick_label_texts.resize( 0 );
+	loop
+		int prompt_ct = bot_prompts.count();
+		double prompt_inc = sc_width / double( prompt_ct - 1 );
+		double x = -sc_width * 0.5;
+		int i = 1;
+	until
+		i > prompt_ct
+	begin
+		text t = new text;
+		t.set_font_size( prompt_font_size );
+		t.set_font_color( prompt_color );
+		t.set_max_text_width( prompt_inc );
+		t.set_background_color( sc_bg_color );
+		t.set_caption( bot_prompts[i], true );
+		tick_label_texts.add( t );
+
+		scale_pic.add_part( tick_label_texts[i], x, resp_position[2] - ( tick_height ) - ( t.height() * 0.5 ) );
+		x = x + prompt_inc;
+		i = i + 1;
+	end;
         
-    if ( sc_init_pos < sc_range[1] ) || ( sc_init_pos > sc_range[2] ) || ( sc_range[1] >= sc_range[2] ) then
-        exit( "Error: Check values for sc_init_pos and sc_range." );
-    end;
-    double init_pct = double( sc_init_pos - sc_range[1] ) / double( sc_range[2] - sc_range[1] );
-    double cursor_x = ( -sc_width * 0.5 ) + ( sc_width * init_pct );
-    scale_pic.add_part( prompt_text, prompt_position[1], prompt_position[2] );
-    scale_pic.add_part( cursor_box, cursor_x, resp_position[2] );
+	if ( sc_init_pos < sc_range[1] ) || ( sc_init_pos > sc_range[2] ) || ( sc_range[1] >= sc_range[2] ) then
+		exit( "Error: Check values for sc_init_pos and sc_range." );
+	end;
+	double init_pct = double( sc_init_pos - sc_range[1] ) / double( sc_range[2] - sc_range[1] );
+	double cursor_x = ( -sc_width * 0.5 ) + ( sc_width * init_pct );
+	scale_pic.add_part( prompt_text, prompt_position[1], prompt_position[2] );
+	scale_pic.add_part( cursor_box, cursor_x, resp_position[2] );
 end;
 
 # --- sub get_scale_response
 
 sub
-    double get_scale_response( string prompt, array<string,1> bot_prompts, string event_code, int duration )
+	double get_scale_response( string prompt, array<string,1> bot_prompts, string event_code, int duration )
 begin
 
-    # Draw scale graphics
-    build_scale( prompt, bot_prompts );
-    
-    # Update event code
-    scale_event.set_event_code( event_code );
-    
-    # Present scale and log onset time
-    scale_trial.present();
-    int start_time = stimulus_manager.last_stimulus_data().time();
-    
-    # Some values to report later
-    int submit_time = 0;
-    double scale_resp = 0.0;
+	# Draw scale graphics
+	build_scale( prompt, bot_prompts );
+ 
+	# Update event code
+	scale_event.set_event_code( event_code );
 
-    # Loop to collect response
-    loop
-        int end_time = clock.time( ) + duration;
-        double curr_scale_pct = double( sc_init_pos - sc_range[1] ) / double( sc_range[2] - sc_range[1] );
-        bool submitted = false;
-    until
-        submitted
-    begin
-        
-        # Update resp
-        scale_resp = ( double( sc_range[2] - sc_range[1] ) * curr_scale_pct ) + sc_range[1];
-        term.print_line( scale_resp );
-        
-        # Wait for a response
-        loop
-            int resp_ct = response_manager.total_response_count();
-        until
-            ( response_manager.total_response_count() > resp_ct ) || ( clock.time() >= end_time )
-        begin
-        end;
+	# Present scale and log onset time
+	scale_trial.present();
+	int start_time = stimulus_manager.last_stimulus_data().time();
 
-        # Exit on timeout
-        if ( clock.time() >= end_time ) then
-            break;
-        end;
-        
-        # Get this last resp
-        response_data last_resp = response_manager.last_response_data();
-        
-        # If submitted, then move on
-        if ( last_resp.button() == BTN_SUBMIT ) then
-            submit_time = last_resp.time();
-            break;
-        end;
-        
-        # If not submitted, update cursor position
-        if ( last_resp.button() == BTN_LEFT ) then
-            curr_scale_pct = curr_scale_pct - sc_increment;
-            if ( curr_scale_pct < 0 ) then
-                curr_scale_pct = 0;
-            end;
-        elseif ( last_resp.button() == BTN_RIGHT ) then
-            curr_scale_pct = curr_scale_pct + sc_increment;
-            if ( curr_scale_pct > 1.0 ) then
-                curr_scale_pct = 1.0;
-            end;
-        end;
-        
-        # Now get new cursor position and transformed (within-range) value.
-        double cursor_x = ( -sc_width * 0.5 ) + ( sc_width * curr_scale_pct );
-        scale_pic.set_part_x( scale_pic.part_count(), cursor_x );
-        scale_pic.present();
+	# Some values to report later
+	int submit_time = 0;
+	double scale_resp = 0.0;
+
+	# Loop to collect response
+	loop
+		int end_time = clock.time( ) + duration;
+		double curr_scale_pct = double( sc_init_pos - sc_range[1] ) / double( sc_range[2] - sc_range[1] );
+		bool submitted = false;
+	until
+		submitted
+	begin
+
+		# Update resp
+		scale_resp = ( double( sc_range[2] - sc_range[1] ) * curr_scale_pct ) + sc_range[1];
+		term.print_line( scale_resp );
+
+		# Wait for a response
+		loop
+			int resp_ct = response_manager.total_response_count();
+		until
+			( response_manager.total_response_count() > resp_ct ) || ( clock.time() >= end_time )
+		begin
+		end;
+
+		# Exit on timeout
+		if ( clock.time() >= end_time ) then
+			break;
+		end;
+
+		# Get this last resp
+		response_data last_resp = response_manager.last_response_data();
+
+		# If submitted, then move on
+		if ( last_resp.button() == BTN_SUBMIT ) then
+			submit_time = last_resp.time();
+			break;
+		end;
+
+		# If not submitted, update cursor position
+		if ( last_resp.button() == BTN_LEFT ) then
+			curr_scale_pct = curr_scale_pct - sc_increment;
+			if ( curr_scale_pct < 0 ) then
+				curr_scale_pct = 0;
+			end;
+		elseif ( last_resp.button() == BTN_RIGHT ) then
+			curr_scale_pct = curr_scale_pct + sc_increment;
+			if ( curr_scale_pct > 1.0 ) then
+				curr_scale_pct = 1.0;
+			end;
+		end;
+
+		# Now get new cursor position and transformed (within-range) value.
+		double cursor_x = ( -sc_width * 0.5 ) + ( sc_width * curr_scale_pct );
+		scale_pic.set_part_x( scale_pic.part_count(), cursor_x );
+		scale_pic.present();
+
+	end;
     
-    end;
-    
-    # Logging submission
+	# Logging submission
 
-     if scale_resp == sc_init_pos && response_manager.response_count() == 0 then
-        logfile.add_event_entry( event_code + " Response: none" );
-     else
-        logfile.add_event_entry( event_code + " Response: " + string( scale_resp ) );
-     end;
+	if scale_resp == sc_init_pos && response_manager.response_count() == 0 then
+		logfile.add_event_entry( event_code + " Response: none" );
+	else
+		logfile.add_event_entry( event_code + " Response: " + string( scale_resp ) );
+	end;
 
-    return scale_resp
+	return scale_resp
 end;
