@@ -1,12 +1,9 @@
 ## Simple objects
 
 picture {
-	text {caption = "Wersja procedury:"; }; x = 0; y = 25;
-	text {caption = EXPARAM( "Group" ); }; x = 0; y = -25;
-} version;
-
-picture {
-	text {caption = "Czekam na sygnał skanera..."; }; x = 0; y = 0;
+	text {caption = "Wersja procedury:"; }; x = 0; y = 100;
+	text {caption = EXPARAM( "Group" ); }; x = 0; y = 50;
+	text {caption = "Czekam na sygnał skanera..."; }; x = 0; y = -50;
 } wait_for_scanner;
 
 picture {
@@ -34,12 +31,6 @@ picture {
 } the_end_pic;
 
 ## Trial objects
-
-trial {
-	picture version;
-	time = 0;
-	duration = response;
-} version_trial;
 
 trial {
 	picture wait_for_scanner;
