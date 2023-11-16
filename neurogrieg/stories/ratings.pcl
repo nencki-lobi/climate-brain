@@ -120,14 +120,13 @@ begin
     int submit_time = 0;
     double scale_resp = 0.0;
 
-     bool timeout = false;
-
     # Loop to collect response
     loop
+        int end_time = clock.time( ) + duration;
         double curr_scale_pct = double( sc_init_pos - sc_range[1] ) / double( sc_range[2] - sc_range[1] );
-          double end_time = clock.time( ) + duration;
+        bool submitted = false;
     until
-        clock.time( ) > end_time
+        submitted
     begin
         
         # Update resp
@@ -135,16 +134,16 @@ begin
         term.print_line( scale_resp );
         
         # Wait for a response
-          int resp_ct = response_manager.total_response_count();
-        
         loop
+            int resp_ct = response_manager.total_response_count();
         until
-            ( response_manager.total_response_count() > resp_ct ) || timeout
+            ( response_manager.total_response_count() > resp_ct ) || ( clock.time() >= end_time )
         begin
-                # Control time
-                if clock.time( ) > end_time then
-                    timeout = true;
-                end;
+        end;
+
+        # Exit on timeout
+        if ( clock.time() >= end_time ) then
+            break;
         end;
         
         # Get this last resp
@@ -174,18 +173,6 @@ begin
         scale_pic.set_part_x( scale_pic.part_count(), cursor_x );
         scale_pic.present();
     
-    end;
-
-    # If no response, print warning
-    if response_manager.response_count() == 0 then
-        string button_warning = "Button count 0!";
-      term.print_line( button_warning );
-    end;
-
-     # If timeout, print warning
-    if timeout then
-        string timeout_warning = "Timeout!";
-      term.print_line( timeout_warning );
     end;
     
     # Logging submission
