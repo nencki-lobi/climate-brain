@@ -2,6 +2,15 @@
 
 picture {
 	text {
+		caption = "Czy masz jakieś pytania?";
+		font_color = 250, 243, 240;
+		font_size = 36;
+	};
+	x = 0; y = 0;
+} wait_for_researcher;
+
+picture {
+	text {
 		caption = "Czekam na sygnał skanera...";
 		font_color = 250, 243, 240;
 		font_size = 36;
@@ -62,6 +71,13 @@ picture {
 } choice;
 
 ## Trial objects
+
+trial {
+	trial_duration = forever;
+	trial_type = specific_response;
+	terminator_button = 3;
+	picture wait_for_researcher;
+} wait_for_researcher_trial;
 
 trial {
 	picture wait_for_scanner;

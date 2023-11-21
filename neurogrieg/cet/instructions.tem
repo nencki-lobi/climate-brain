@@ -1,4 +1,3 @@
-﻿
 trial {
 		trial_type = first_response;
 		trial_duration = forever;

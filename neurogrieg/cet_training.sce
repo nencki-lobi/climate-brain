@@ -3,8 +3,8 @@
 no_logfile = true;
 
 response_matching = simple_matching;
-active_buttons = 2;
-button_codes = 11,12;
+active_buttons = 3;
+button_codes = 11,12,13;
 
 default_background_color = 68, 81, 95;
 default_text_color = 68, 81, 95;
@@ -57,24 +57,25 @@ TEMPLATE "./cet/cet.tem";
 
 begin_pcl;
 
-	
 loop int i = 1 until i > 29
 
 	begin
 	ins[i].present();
    	
-   int type = stimulus_manager.last_stimulus_data().type();
-		if (type == stimulus_incorrect) then
-			i = i + 1;
-		elseif (type == stimulus_hit) then
-			i = i - 1;	
-		end;
-		
-		if i < 1 then
-		i = 1
-		end;
-	
+	int type = stimulus_manager.last_stimulus_data().type();
+
+	if (type == stimulus_incorrect) then
+		i = i + 1;
+	elseif (type == stimulus_hit) then
+		i = i - 1;	
 	end;
+		
+	if i < 1 then
+		i = 1
+	end;
+end;
+
+wait_for_researcher_trial.present();
 
 input_file cet_file = new input_file;
 cet_file.open("./cet/stimuli/cet_training.txt");
