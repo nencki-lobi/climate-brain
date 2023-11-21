@@ -27,6 +27,7 @@ until
 	!is_choice
 begin
 	
+	fix_trial.set_start_delay(cet_file.get_int()); # jitter
 	fix_trial.present();
 	
 	# Set CET trial to be displayed
