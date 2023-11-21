@@ -1,7 +1,7 @@
-Wybierz jedną z opcji:	Biorę 80 zł	Usuwam 10 kg CO2 (50 km autem)	z3_k2
-Wybierz opcję po lewej	Biorę 0 zł	Usuwam 0 kg CO2 (0 km autem)	dl_01
-Wybierz jedną z opcji:	Usuwam 0 kg CO2 (0 km autem)	Biorę 50 zł	k0_z2
-Wybierz jedną z opcji:	Biorę 10 zł	Usuwam 25 kg CO2 (125 km autem)	z1_k3
-Wybierz opcję po prawej	Usuwam 0 kg CO2 (0 km autem)	Biorę 0 zł	dr_01
-Wybierz jedną z opcji:	Usuwam 40 kg CO2 (200 km autem)	 Biorę 80 zł	k4_z3
-Wybierz jedną z opcji:	Biorę 100 zł	Usuwam 2 kg CO2 (10 km autem)	z4_k1
+Wybierz jedną z opcji:	Biorę 80 zł	Usuwam 10 kg CO2 (50 km autem)	m3_c2	2500
+Wybierz opcję po lewej:	Biorę 0 zł	Usuwam 0 kg CO2 (0 km autem)	dl0	2250
+Wybierz jedną z opcji:	Usuwam 0 kg CO2 (0 km autem)	Biorę 50 zł	c0_m2	2000
+Wybierz jedną z opcji:	Biorę 10 zł	Usuwam 25 kg CO2 (125 km autem)	m1_c3	2500
+Wybierz opcję po prawej:	Usuwam 0 kg CO2 (0 km autem)	Biorę 0 zł	dr1	3000
+Wybierz jedną z opcji:	Usuwam 40 kg CO2 (200 km autem)	Biorę 80 zł	c4_m3	3500
+Wybierz jedną z opcji:	Biorę 100 zł	Usuwam 2 kg CO2 (10 km autem)	m4_c1	3750
