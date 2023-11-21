@@ -104,7 +104,7 @@
 <edit>1</edit>
 <name>Group</name>
 <set>
-<rest>ANG, HOP, NEU</rest>
+<rest>A, H, N</rest>
 </set>
 <temp>0</temp>
 <type>string</type>
