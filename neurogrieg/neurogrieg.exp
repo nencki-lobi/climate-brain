@@ -1,4 +1,4 @@
-﻿<ver>24</ver>
+<ver>24</ver>
 <efn>./neurogrieg.exp</efn>
 <author></author>
 <con>
@@ -809,9 +809,12 @@
 <dx_device_type>19</dx_device_type>
 <ibn>A</ibn>
 <ibn>B</ibn>
+<ibn>C</ibn>
 <idn>Klawiatura</idn>
 <index>0</index>
 <index>1</index>
+<index>2</index>
+<label></label>
 <label></label>
 <label></label>
 <offset>30</offset>

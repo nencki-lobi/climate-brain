@@ -7,8 +7,8 @@ pulse_code = 111;
 no_logfile = false;
 
 response_matching = simple_matching;
-active_buttons = 2;
-button_codes = 11,12;
+active_buttons = 3;
+button_codes = 11,12,13;
 
 default_background_color = 68, 81, 95;
 default_text_color = 68, 81, 95;
