@@ -3,8 +3,6 @@
 picture {
 	text {
 		caption = "Czy masz jakieś pytania?";
-		font_color = 250, 243, 240;
-		font_size = 36;
 	};
 	x = 0; y = 0;
 } wait_for_researcher;
@@ -34,19 +32,17 @@ picture {
 
 picture {
 	text {
-		caption = "Przerwa \n Zaraz odezwie się badacz";
-	};
-	x = 0; y = 0;
-} the_end_pic;
-
-picture {
-	text {
 		caption = "Skan nadal trwa. Proszę leżeć spokojnie i starać się nie poruszać.";
-		font_color = 250, 243, 240;
-		font_size = 36;
 	};
 	x = 0; y = 0;
 } lay_still;
+
+picture {
+	text {
+		caption = "Przerwa. \n Zaraz odezwie się badacz.";
+	};
+	x = 0; y = 0;
+} the_end_pic;
 
 ## Trial objects
 
@@ -101,13 +97,13 @@ trial {
 } empty_trial;
 
 trial {
+	trial_duration = 1000000;
+	picture lay_still;
+} lay_still_trial;
+
+trial {
 	trial_duration = 100000;
 	stimulus_event {
 		picture the_end_pic;
 	};
 } the_end_trial;
-
-trial {
-	trial_duration = 1000000;
-	picture lay_still;
-} lay_still_trial;

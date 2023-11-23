@@ -24,7 +24,7 @@ picture {
 		max_text_height = 700;
 	};
 	x = 0; y = 0;
-} see;
+} can_you_see;
 
 picture {
 	text {
@@ -73,8 +73,8 @@ trial {
 	trial_duration = forever;
 	trial_type = specific_response;
 	terminator_button = 3;
-	picture see;
-} see_trial;
+	picture can_you_see;
+} can_you_see_trial;
 
 trial {	
 	picture instruction1;
@@ -101,7 +101,7 @@ begin_pcl;
 
 string stimulus_file = "./stories/stimuli/stories_training.txt";
 
-see_trial.present();
+can_you_see_trial.present();
 
 instruction_trial.present();
 

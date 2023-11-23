@@ -21,7 +21,8 @@ picture {
 picture {
 	text {
 		caption = "+";
-	font_color = 250, 243, 240; 
+		font_size = 96;
+		font_color = 250, 243, 240; 
 	};
 	x = 0; y = 0;
 } fix_pic;
