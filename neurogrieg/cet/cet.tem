@@ -27,6 +27,14 @@ picture {
 } fix_pic;
 
 picture {
+	text {
+		caption = "Koniec badania. Za chwilę pomożemy Ci wyjść ze skanera.";
+	font_color = 250, 243, 240; 
+	};
+	x = 0; y = 0;
+} the_end_pic;
+
+picture {
    
    # Response highlight
 
@@ -101,3 +109,11 @@ trial {
 		code = "trial";
 		} cet_event;
 } cet_trial;
+
+trial {
+	stimulus_event {
+		picture the_end_pic;
+		time = 0;
+		duration = 10000;
+	};
+} the_end_trial;

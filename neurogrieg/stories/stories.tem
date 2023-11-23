@@ -1,6 +1,15 @@
 ## Simple objects
 
 picture {
+	text {
+		caption = "Czy masz jakieś pytania?";
+		font_color = 250, 243, 240;
+		font_size = 36;
+	};
+	x = 0; y = 0;
+} wait_for_researcher;
+
+picture {
 	text {caption = "Wersja procedury:"; }; x = 0; y = 100;
 	text {caption = EXPARAM( "Group" ); }; x = 0; y = 50;
 	text {caption = "Czekam na sygnał skanera..."; }; x = 0; y = -50;
@@ -25,12 +34,28 @@ picture {
 
 picture {
 	text {
-		caption = "Koniec!";
+		caption = "Przerwa \n Zaraz odezwie się badacz";
 	};
 	x = 0; y = 0;
 } the_end_pic;
 
+picture {
+	text {
+		caption = "Skan nadal trwa. Proszę leżeć spokojnie i starać się nie poruszać.";
+		font_color = 250, 243, 240;
+		font_size = 36;
+	};
+	x = 0; y = 0;
+} lay_still;
+
 ## Trial objects
+
+trial {
+	trial_duration = forever;
+	trial_type = specific_response;
+	terminator_button = 3;
+	picture wait_for_researcher;
+} wait_for_researcher_trial;
 
 trial {
 	picture wait_for_scanner;
@@ -76,8 +101,13 @@ trial {
 } empty_trial;
 
 trial {
-	trial_duration = 3000;
+	trial_duration = 100000;
 	stimulus_event {
 		picture the_end_pic;
 	};
 } the_end_trial;
+
+trial {
+	trial_duration = 1000000;
+	picture lay_still;
+} lay_still_trial;

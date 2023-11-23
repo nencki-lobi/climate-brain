@@ -1,10 +1,10 @@
 ### SDL header part
 
-no_logfile = false;
+no_logfile = true;
 
 response_matching = simple_matching;
-active_buttons = 2;
-button_codes = 11,12;
+active_buttons = 3;
+button_codes = 11,12,13;
 
 default_background_color = 68, 81, 95;
 default_text_color = 250, 243, 240;
@@ -24,7 +24,7 @@ picture {
 		max_text_height = 700;
 	};
 	x = 0; y = 0;
-} instruction1;
+} see;
 
 picture {
 	text {
@@ -34,7 +34,7 @@ picture {
 		max_text_height = 700;
 	};
 	x = 0; y = 0;
-} instruction2;
+} instruction1;
 
 picture {
 	text {
@@ -46,7 +46,7 @@ picture {
 		max_text_height = 700;
 	};
 	x = 0; y = 0;
-} instruction3;
+} instruction2;
 
 picture {
 	text {
@@ -56,7 +56,7 @@ picture {
 		max_text_height = 700;
 	};
 	x = 0; y = 0;
-} instruction4;
+} instruction3;
 
 picture {
 	text {
@@ -67,12 +67,18 @@ picture {
 		max_text_height = 700;
 	};
 	x = 0; y = 0;
-} instruction5;
+} instruction4;
 
 trial {
-	
+	trial_duration = forever;
+	trial_type = specific_response;
+	terminator_button = 3;
+	picture see;
+} see_trial;
+
+trial {	
 	picture instruction1;
-	time = 0;
+	deltat = 0;
 	duration = response;
 	
 	picture instruction2;
@@ -82,13 +88,9 @@ trial {
 	picture instruction3;
 	deltat = 0; # show as soon as instruction2 is done
 	duration = response;
-	
+   
 	picture instruction4;
 	deltat = 0; # show as soon as instruction3 is done
-	duration = response;
-   
-	picture instruction5;
-	deltat = 0; # show as soon as instruction4 is done
 	duration = response;
 	
 } instruction_trial;
@@ -99,5 +101,13 @@ begin_pcl;
 
 string stimulus_file = "./stories/stimuli/stories_training.txt";
 
+see_trial.present();
+
 instruction_trial.present();
+
+wait_for_researcher_trial.present();
+
 include "./stories/stories.pcl"
+
+lay_still_trial.present();
+

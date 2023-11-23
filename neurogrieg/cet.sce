@@ -30,4 +30,7 @@ cet_file.open("./cet/stimuli/cet.txt");
 cet_file.set_delimiter('\t');
 
 wait_for_scanner_trial.present();
-include "./cet/cet.pcl"
+
+include "./cet/cet.pcl";
+
+the_end_trial.present();

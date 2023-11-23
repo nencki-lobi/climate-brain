@@ -46,5 +46,3 @@ begin
 	is_story = stories_file.last_succeeded();
 	
 end;
-
-the_end_trial.present();
