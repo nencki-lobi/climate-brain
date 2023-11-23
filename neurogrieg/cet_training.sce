@@ -47,7 +47,7 @@ PIC				CODE		TRIAL_NAME;
 "cet/instructions/i-0027.jpg"	"I27"			I27;
 "cet/instructions/i-0028.jpg"	"I28"			I28;
 "cet/instructions/i-0029.jpg"	"I29"			I29;
-
+"cet/instructions/i-0030.jpg"	"I30"			I30;
 }; 				
 }ins;	
 
@@ -57,7 +57,7 @@ TEMPLATE "./cet/cet.tem";
 
 begin_pcl;
 
-loop int i = 1 until i > 29
+loop int i = 1 until i > 30
 
 	begin
 	ins[i].present();
