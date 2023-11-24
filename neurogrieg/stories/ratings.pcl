@@ -3,7 +3,7 @@
 # Some setup values
 int BTN_LEFT = 1;
 int BTN_RIGHT = 2;
-int BTN_SUBMIT = 3;
+int BTN_SUBMIT = 99;
 
 # Scale properties
 double sc_width = 1000;
