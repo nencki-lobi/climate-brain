@@ -131,7 +131,7 @@ begin
 
 		# Update resp
 		scale_resp = ( double( sc_range[2] - sc_range[1] ) * curr_scale_pct ) + sc_range[1];
-		term.print_line( scale_resp );
+		term.print_line( round(scale_resp, 0) );
 
 		# Wait for a response
 		loop
@@ -180,7 +180,7 @@ begin
 	if scale_resp == sc_init_pos && response_manager.response_count() == 0 then
 		logfile.add_event_entry( event_code + " Response: none" );
 	else
-		logfile.add_event_entry( event_code + " Response: " + string( scale_resp ) );
+		logfile.add_event_entry( event_code + " Response: " + string( round(scale_resp, 0) ) );
 	end;
 
 	return scale_resp
