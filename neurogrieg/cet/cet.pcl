@@ -1,11 +1,9 @@
 # Custom log file
 
 output_file out = new output_file;
-string results_file = logfile.subject();
-results_file.append("-cet");
-results_file.append(date_time("_d_m_yy_h_nn"));
-results_file.append(".txt.");
-out.open( results_file );  
+string custom_fname = logfile.filename();
+custom_fname = custom_fname.replace(".log", "-custom.txt");
+out.open( custom_fname );  
 
 # Stimuli
 
@@ -57,26 +55,20 @@ begin
 		if response_manager.response_count(1) > confirmation_left && conf == 0 then
 			conf = 1;
 			resp_l.set_color(90, 169, 230);
-			out.print("HIT: ");
-			out.print(left);
-			out.print(" NOT: ");
-			out.print_line(right);
+			out.print(cet_code);
+			out.print_line("	LEFT");
 		elseif response_manager.response_count(2) > confirmation_right && conf == 0 then
 			conf = 1;
 			resp_r.set_color(90, 169, 230);
-			out.print("HIT: ");
-			out.print(right);
-			out.print(" NOT: ");
-			out.print_line(left);
+			out.print(cet_code);
+			out.print_line("	RIGHT");
 		end;
 		choice.present();
 	end;
 	
 	if response_manager.response_count() == 0 then
-		out.print("MISS: ");
-		out.print(left);
-		out.print(" / ");
-		out.print_line(right);
+		out.print(cet_code);
+		out.print_line("	NONE");
 	end;
 	
 	# Prepare for the next trial
