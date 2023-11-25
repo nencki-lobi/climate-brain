@@ -2,6 +2,7 @@
 
 output_file out = new output_file;
 string custom_fname = logfile.filename();
+custom_fname = custom_fname.replace(logfile_directory, "");
 custom_fname = custom_fname.replace(".log", "-custom.txt");
 out.open( custom_fname );  
 
