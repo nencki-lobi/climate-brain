@@ -96,11 +96,18 @@ trial {
 	mri_pulse = 1;
 } wait_for_scanner_trial;
 
+trial {
+	stimulus_event {
+      picture {};
+		duration = 500;
+   };
+} empty_trial;
+
 trial{
 	stimulus_event {
 		picture fix_pic;
 		time = 0;
-		duration = 3000;
+		duration = 2500;
 	} fix_event;
 } fix_trial;
 
@@ -108,7 +115,7 @@ trial {
 	stimulus_event {
 		picture choice;
 		code = "trial";
-		} cet_event;
+	} cet_event;
 } cet_trial;
 
 trial {
