@@ -1,5 +1,5 @@
 <ver>23.1</ver>
-<efn>./neurogrieg.exp</efn>
+<efn>C:\Users\Badanie\Desktop\BADANIA AKTUALNE\AM23B\neurogrieg\neurogrieg.exp</efn>
 <author></author>
 <con>
 <pause>P</pause>
@@ -45,17 +45,17 @@
 <dwm>0</dwm>
 <dxv>8</dxv>
 <efs>
-<filename>./stories_training.sce</filename>
-<filename>./stories_R1.sce</filename>
-<filename>./stories_R2.sce</filename>
-<filename>./stories_R3.sce</filename>
-<filename>./stories/stories.pcl</filename>
-<filename>./stories/ratings.pcl</filename>
-<filename>./stories/stories.tem</filename>
-<filename>./cet_training.sce</filename>
-<filename>./cet.sce</filename>
-<filename>./cet/cet.pcl</filename>
-<filename>./cet/cet.tem</filename>
+<filename>C:\Users\Badanie\Desktop\BADANIA AKTUALNE\AM23B\neurogrieg\stories_training.sce</filename>
+<filename>C:\Users\Badanie\Desktop\BADANIA AKTUALNE\AM23B\neurogrieg\stories_R1.sce</filename>
+<filename>C:\Users\Badanie\Desktop\BADANIA AKTUALNE\AM23B\neurogrieg\stories_R2.sce</filename>
+<filename>C:\Users\Badanie\Desktop\BADANIA AKTUALNE\AM23B\neurogrieg\stories_R3.sce</filename>
+<filename>C:\Users\Badanie\Desktop\BADANIA AKTUALNE\AM23B\neurogrieg\cet_training.sce</filename>
+<filename>C:\Users\Badanie\Desktop\BADANIA AKTUALNE\AM23B\neurogrieg\cet.sce</filename>
+<filename>C:\Users\Badanie\Desktop\BADANIA AKTUALNE\AM23B\neurogrieg\stories\stories.pcl</filename>
+<filename>C:\Users\Badanie\Desktop\BADANIA AKTUALNE\AM23B\neurogrieg\stories\ratings.pcl</filename>
+<filename>C:\Users\Badanie\Desktop\BADANIA AKTUALNE\AM23B\neurogrieg\stories\stories.tem</filename>
+<filename>C:\Users\Badanie\Desktop\BADANIA AKTUALNE\AM23B\neurogrieg\cet\cet.pcl</filename>
+<filename>C:\Users\Badanie\Desktop\BADANIA AKTUALNE\AM23B\neurogrieg\cet\cet.tem</filename>
 </efs>
 <exclusive_mouse>1</exclusive_mouse>
 <exp_version></exp_version>
@@ -174,7 +174,7 @@
 <idt>0</idt>
 <ilc>0</ilc>
 <ip_chans></ip_chans>
-<lfd>./logs</lfd>
+<lfd>C:\Users\Badanie\Desktop\BADANIA AKTUALNE\AM23B\neurogrieg\logs</lfd>
 <lnb>0</lnb>
 <lno>4</lno>
 <log>
@@ -807,7 +807,7 @@
 <unique_id>1</unique_id>
 </idv>
 <overrides></overrides>
-<sfn>./stories_training.sce</sfn>
+<sfn>C:\Users\Badanie\Desktop\BADANIA AKTUALNE\AM23B\neurogrieg\stories_training.sce</sfn>
 </sce>
 <sce>
 <idv>
@@ -829,7 +829,7 @@
 <unique_id>1</unique_id>
 </idv>
 <overrides></overrides>
-<sfn>./stories_R1.sce</sfn>
+<sfn>C:\Users\Badanie\Desktop\BADANIA AKTUALNE\AM23B\neurogrieg\stories_R1.sce</sfn>
 </sce>
 <sce>
 <idv>
@@ -851,7 +851,7 @@
 <unique_id>1</unique_id>
 </idv>
 <overrides></overrides>
-<sfn>./stories_R2.sce</sfn>
+<sfn>C:\Users\Badanie\Desktop\BADANIA AKTUALNE\AM23B\neurogrieg\stories_R2.sce</sfn>
 </sce>
 <sce>
 <idv>
@@ -873,7 +873,7 @@
 <unique_id>1</unique_id>
 </idv>
 <overrides></overrides>
-<sfn>./stories_R3.sce</sfn>
+<sfn>C:\Users\Badanie\Desktop\BADANIA AKTUALNE\AM23B\neurogrieg\stories_R3.sce</sfn>
 </sce>
 <sce>
 <idv>
@@ -895,7 +895,7 @@
 <unique_id>1</unique_id>
 </idv>
 <overrides></overrides>
-<sfn>./cet_training.sce</sfn>
+<sfn>C:\Users\Badanie\Desktop\BADANIA AKTUALNE\AM23B\neurogrieg\cet_training.sce</sfn>
 </sce>
 <sce>
 <idv>
@@ -917,7 +917,7 @@
 <unique_id>1</unique_id>
 </idv>
 <overrides></overrides>
-<sfn>./cet.sce</sfn>
+<sfn>C:\Users\Badanie\Desktop\BADANIA AKTUALNE\AM23B\neurogrieg\cet.sce</sfn>
 </sce>
 <sct>
 <capture_device>
