@@ -1,4 +1,4 @@
-<ver>24</ver>
+<ver>23.1</ver>
 <efn>./neurogrieg.exp</efn>
 <author></author>
 <con>
@@ -222,9 +222,9 @@
 <spr></spr>
 <sps></sps>
 </parameters>
-<piai>COM7</piai>
+<piai>COM1</piai>
 <pian>Serial Port</pian>
-<pihpn>COM7</pihpn>
+<pihpn>COM1</pihpn>
 </device>
 <device>
 <parameters>
@@ -239,9 +239,9 @@
 <spr></spr>
 <sps></sps>
 </parameters>
-<piai>COM13</piai>
+<piai>COM2</piai>
 <pian>Serial Port</pian>
-<pihpn>COM13</pihpn>
+<pihpn>COM2</pihpn>
 </device>
 <device>
 <parameters>
@@ -256,9 +256,9 @@
 <spr></spr>
 <sps></sps>
 </parameters>
-<piai>COM14</piai>
+<piai>COM3</piai>
 <pian>Serial Port</pian>
-<pihpn>COM14</pihpn>
+<pihpn>COM3</pihpn>
 </device>
 <device>
 <parameters>
@@ -273,9 +273,26 @@
 <spr></spr>
 <sps></sps>
 </parameters>
-<piai>COM18</piai>
+<piai>COM20</piai>
 <pian>Serial Port</pian>
-<pihpn>COM18</pihpn>
+<pihpn>COM20</pihpn>
+</device>
+<device>
+<parameters>
+<cts>0</cts>
+<dsrin>0</dsrin>
+<dsrout>0</dsrout>
+<dtr>disable</dtr>
+<rts>disable</rts>
+<set_fifo>1</set_fifo>
+<spd></spd>
+<spp></spp>
+<spr></spr>
+<sps></sps>
+</parameters>
+<piai>COM21</piai>
+<pian>Serial Port</pian>
+<pihpn>COM21</pihpn>
 </device>
 </port_devices>
 <rdl>
@@ -297,21 +314,21 @@
 <axis>
 <max>1000</max>
 <min>-1000</min>
-<name>Oś X</name>
+<name>X-axis</name>
 <restricted>1</restricted>
 <scale>1</scale>
 </axis>
 <axis>
 <max>1000</max>
 <min>-1000</min>
-<name>Oś Y</name>
+<name>Y-axis</name>
 <restricted>1</restricted>
 <scale>1</scale>
 </axis>
 <axis>
 <max>1000</max>
 <min>-1000</min>
-<name>Kółko</name>
+<name>Wheel</name>
 <restricted>1</restricted>
 <scale>1</scale>
 </axis>
@@ -319,19 +336,24 @@
 <dx_device_type>18</dx_device_type>
 <max_raw_pos>65535</max_raw_pos>
 <min_raw_pos>0</min_raw_pos>
-<name>Mysz</name>
+<name>Mouse</name>
 <unique_id>0</unique_id>
 </device>
 <device>
 <device_type>3</device_type>
 <dx_device_type>19</dx_device_type>
-<name>Klawiatura</name>
+<name>Keyboard</name>
 <unique_id>1</unique_id>
 </device>
 <device>
 <device_type>3</device_type>
 <dx_device_type>0</dx_device_type>
-<name>Standardowa klawiatura PS/2</name>
+<name>HID Keyboard Device</name>
+</device>
+<device>
+<device_type>3</device_type>
+<dx_device_type>0</dx_device_type>
+<name>Standard PS/2 Keyboard</name>
 </device>
 <device>
 <abs_axis>
@@ -373,12 +395,64 @@
 <dx_device_type>0</dx_device_type>
 <max_raw_pos>65535</max_raw_pos>
 <min_raw_pos>0</min_raw_pos>
-<name>Synaptics PS/2 Port TouchPad</name>
+<name>PS/2 Compatible Mouse</name>
+</device>
+<device>
+<abs_axis>
+<dead_zone>0</dead_zone>
+<max>1000</max>
+<min>-1000</min>
+<name>X-axis</name>
+<saturation>1</saturation>
+</abs_axis>
+<abs_axis>
+<dead_zone>0</dead_zone>
+<max>1000</max>
+<min>-1000</min>
+<name>Y-axis</name>
+<saturation>1</saturation>
+</abs_axis>
+<axis>
+<max>1000</max>
+<min>-1000</min>
+<name>X-axis</name>
+<restricted>1</restricted>
+<scale>1</scale>
+</axis>
+<axis>
+<max>1000</max>
+<min>-1000</min>
+<name>Y-axis</name>
+<restricted>1</restricted>
+<scale>1</scale>
+</axis>
+<axis>
+<max>1000</max>
+<min>-1000</min>
+<name>Wheel</name>
+<restricted>1</restricted>
+<scale>1</scale>
+</axis>
+<device_type>2</device_type>
+<dx_device_type>0</dx_device_type>
+<max_raw_pos>65535</max_raw_pos>
+<min_raw_pos>0</min_raw_pos>
+<name>HID-compliant mouse</name>
 </device>
 <device>
 <device_type>4</device_type>
 <dx_device_type>17</dx_device_type>
-<name>Bluetooth Remote Control HID Device</name>
+<name>Micr</name>
+</device>
+<device>
+<device_type>4</device_type>
+<dx_device_type>17</dx_device_type>
+<name>Microsoft Hardware USB Mouse</name>
+</device>
+<device>
+<device_type>4</device_type>
+<dx_device_type>17</dx_device_type>
+<name>Micr 1</name>
 </device>
 <device>
 <axis>
@@ -418,7 +492,6 @@
 <srgs></srgs>
 <uwd>0</uwd>
 <vocab></vocab>
-<vosk_model></vosk_model>
 </speech>
 </device>
 <device>
@@ -699,7 +772,7 @@
 <ibn>A</ibn>
 <ibn>B</ibn>
 <ibn>C</ibn>
-<idn>Klawiatura</idn>
+<idn>Keyboard</idn>
 <index>0</index>
 <index>1</index>
 <index>2</index>
@@ -708,6 +781,7 @@
 <label></label>
 <offset>30</offset>
 <offset>48</offset>
+<offset>46</offset>
 <unique_id>1</unique_id>
 </idv>
 <overrides></overrides>
@@ -720,7 +794,7 @@
 <ibn>A</ibn>
 <ibn>B</ibn>
 <ibn>C</ibn>
-<idn>Klawiatura</idn>
+<idn>Keyboard</idn>
 <index>0</index>
 <index>1</index>
 <index>2</index>
@@ -729,6 +803,7 @@
 <label></label>
 <offset>30</offset>
 <offset>48</offset>
+<offset>46</offset>
 <unique_id>1</unique_id>
 </idv>
 <overrides></overrides>
@@ -741,7 +816,7 @@
 <ibn>A</ibn>
 <ibn>B</ibn>
 <ibn>C</ibn>
-<idn>Klawiatura</idn>
+<idn>Keyboard</idn>
 <index>0</index>
 <index>1</index>
 <index>2</index>
@@ -750,6 +825,7 @@
 <label></label>
 <offset>30</offset>
 <offset>48</offset>
+<offset>46</offset>
 <unique_id>1</unique_id>
 </idv>
 <overrides></overrides>
@@ -762,7 +838,7 @@
 <ibn>A</ibn>
 <ibn>B</ibn>
 <ibn>C</ibn>
-<idn>Klawiatura</idn>
+<idn>Keyboard</idn>
 <index>0</index>
 <index>1</index>
 <index>2</index>
@@ -771,6 +847,7 @@
 <label></label>
 <offset>30</offset>
 <offset>48</offset>
+<offset>46</offset>
 <unique_id>1</unique_id>
 </idv>
 <overrides></overrides>
@@ -783,7 +860,7 @@
 <ibn>A</ibn>
 <ibn>B</ibn>
 <ibn>C</ibn>
-<idn>Klawiatura</idn>
+<idn>Keyboard</idn>
 <index>0</index>
 <index>1</index>
 <index>2</index>
@@ -792,6 +869,7 @@
 <label></label>
 <offset>30</offset>
 <offset>48</offset>
+<offset>46</offset>
 <unique_id>1</unique_id>
 </idv>
 <overrides></overrides>
@@ -804,7 +882,7 @@
 <ibn>A</ibn>
 <ibn>B</ibn>
 <ibn>C</ibn>
-<idn>Klawiatura</idn>
+<idn>Keyboard</idn>
 <index>0</index>
 <index>1</index>
 <index>2</index>
@@ -813,6 +891,7 @@
 <label></label>
 <offset>30</offset>
 <offset>48</offset>
+<offset>46</offset>
 <unique_id>1</unique_id>
 </idv>
 <overrides></overrides>
@@ -825,7 +904,7 @@
 <ibn>A</ibn>
 <ibn>B</ibn>
 <ibn>C</ibn>
-<idn>Klawiatura</idn>
+<idn>Keyboard</idn>
 <index>0</index>
 <index>1</index>
 <index>2</index>
@@ -834,6 +913,7 @@
 <label></label>
 <offset>30</offset>
 <offset>48</offset>
+<offset>46</offset>
 <unique_id>1</unique_id>
 </idv>
 <overrides></overrides>
@@ -847,7 +927,6 @@
 <closest_match>0</closest_match>
 <closest_match_max></closest_match_max>
 <closest_match_min>1, 16, 8000</closest_match_min>
-<dev_name>None</dev_name>
 <do_rec_vol>0</do_rec_vol>
 <freq></freq>
 <ignore_drops>1</ignore_drops>
@@ -887,7 +966,7 @@
 <use_dev_freq>1</use_dev_freq>
 <use_rewind_distance>0</use_rewind_distance>
 </sde>
-<sdv>Podstawowy sterownik dźwięku</sdv>
+<sdv>Primary Sound Driver</sdv>
 <show_dis>0</show_dis>
 <show_parm>0</show_parm>
 <show_term>1</show_term>
@@ -917,7 +996,7 @@
 <device_type>3</device_type>
 <dx_device_type>19</dx_device_type>
 <ibn>S</ibn>
-<idn>Klawiatura</idn>
+<idn>Keyboard</idn>
 <index>0</index>
 <label></label>
 <offset>31</offset>
