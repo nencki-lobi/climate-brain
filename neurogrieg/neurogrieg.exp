@@ -20,13 +20,13 @@
 </con>
 <dbi></dbi>
 <dbs>button</dbs>
-<ddi>0</ddi>
+<ddi>1</ddi>
 <dds>
 <icm_profile></icm_profile>
 <orient>0</orient>
 <use_icm>0</use_icm>
 </dds>
-<ddv>Primary Display Driver</ddv>
+<ddv>NVIDIA GeForce GTX 1060 6GB</ddv>
 <depchg>1</depchg>
 <discard_windows_messages>0</discard_windows_messages>
 <display_status_window>1</display_status_window>
@@ -273,6 +273,23 @@
 <spr></spr>
 <sps></sps>
 </parameters>
+<piai>COM18</piai>
+<pian>Serial Port</pian>
+<pihpn>COM18</pihpn>
+</device>
+<device>
+<parameters>
+<cts>0</cts>
+<dsrin>0</dsrin>
+<dsrout>0</dsrout>
+<dtr>disable</dtr>
+<rts>disable</rts>
+<set_fifo>1</set_fifo>
+<spd></spd>
+<spp></spp>
+<spr></spr>
+<sps></sps>
+</parameters>
 <piai>COM20</piai>
 <pian>Serial Port</pian>
 <pihpn>COM20</pihpn>
@@ -346,9 +363,56 @@
 <unique_id>1</unique_id>
 </device>
 <device>
+<abs_axis>
+<dead_zone>0</dead_zone>
+<max>1000</max>
+<min>-1000</min>
+<name>X-axis</name>
+<saturation>1</saturation>
+</abs_axis>
+<abs_axis>
+<dead_zone>0</dead_zone>
+<max>1000</max>
+<min>-1000</min>
+<name>Y-axis</name>
+<saturation>1</saturation>
+</abs_axis>
+<axis>
+<max>1000</max>
+<min>-1000</min>
+<name>X-axis</name>
+<restricted>1</restricted>
+<scale>1</scale>
+</axis>
+<axis>
+<max>1000</max>
+<min>-1000</min>
+<name>Y-axis</name>
+<restricted>1</restricted>
+<scale>1</scale>
+</axis>
+<axis>
+<max>1000</max>
+<min>-1000</min>
+<name>Wheel</name>
+<restricted>1</restricted>
+<scale>1</scale>
+</axis>
+<device_type>2</device_type>
+<dx_device_type>0</dx_device_type>
+<max_raw_pos>65535</max_raw_pos>
+<min_raw_pos>0</min_raw_pos>
+<name>HID-compliant mouse</name>
+</device>
+<device>
 <device_type>3</device_type>
 <dx_device_type>0</dx_device_type>
 <name>HID Keyboard Device</name>
+</device>
+<device>
+<device_type>3</device_type>
+<dx_device_type>0</dx_device_type>
+<name>HID Keyboard Device 1</name>
 </device>
 <device>
 <device_type>3</device_type>
@@ -437,7 +501,7 @@
 <dx_device_type>0</dx_device_type>
 <max_raw_pos>65535</max_raw_pos>
 <min_raw_pos>0</min_raw_pos>
-<name>HID-compliant mouse</name>
+<name>HID-compliant mouse 1</name>
 </device>
 <device>
 <device_type>4</device_type>
@@ -453,6 +517,48 @@
 <device_type>4</device_type>
 <dx_device_type>17</dx_device_type>
 <name>Micr 1</name>
+</device>
+<device>
+<device_type>12</device_type>
+<dx_device_type>0</dx_device_type>
+<name>S2_Synchro</name>
+<redp>IsNoErrorDeviceOffLineEn = 0;IsHWTimestampEn = 1;OpticalActiveEdge = 1;TTLActiveEdge = 1;RS422ActiveEdge = 1;TTL50OhmTermEn = 1;IdleStateTTL = 0;IdleStateRS422 = 0;ModeTTL = 1;ModeRS422 = 0;DurationTTL = 10;DurationRS422 = 100;RstOnStartTTL = 1;RstOnStartRS422 = 1;TrgOnSyncTTL = 1;TrgOnSyncRS422 = 0;TimerPeriod = 2000;TimerNCyc = 0;TimerArmed = 0;FilSelectionIn = 0;FilMaskPHY = 1;FilterEn = 0;FilSlices = 1;FilSliceTrg = 1;FilDummy = 0;FilVolumes = 1;FilVolumeTrg = 1;</redp>
+</device>
+<device>
+<device_type>12</device_type>
+<dx_device_type>0</dx_device_type>
+<name>S2_RPad1_B11CA897E2ED</name>
+<redp></redp>
+</device>
+<device>
+<device_type>12</device_type>
+<dx_device_type>0</dx_device_type>
+<name>S2_RPad2_B11C46104E14</name>
+<redp></redp>
+</device>
+<device>
+<device_type>12</device_type>
+<dx_device_type>0</dx_device_type>
+<name>S2_ErgoPad3_B11C635B33E7</name>
+<redp></redp>
+</device>
+<device>
+<device_type>12</device_type>
+<dx_device_type>0</dx_device_type>
+<name>S2_ErgoPad4_B11C69705AFB</name>
+<redp></redp>
+</device>
+<device>
+<device_type>12</device_type>
+<dx_device_type>0</dx_device_type>
+<name>S2_Midi5_B11C72BB743E</name>
+<redp>KeyOffset = 48;VelocityCorr = 4088;KeysCodes[0] = 0;KeysCodes[1] = 1;KeysCodes[2] = 2;KeysCodes[3] = 3;KeysCodes[4] = 4;KeysCodes[5] = 5;KeysCodes[6] = 6;KeysCodes[7] = 7;KeysCodes[8] = 8;KeysCodes[9] = 9;KeysCodes[10] = 10;KeysCodes[11] = 11;KeysCodes[12] = 12;KeysCodes[13] = 13;KeysCodes[14] = 14;KeysCodes[15] = 15;KeysCodes[16] = 16;KeysCodes[17] = 17;KeysCodes[18] = 18;KeysCodes[19] = 19;KeysCodes[20] = 20;KeysCodes[21] = 21;KeysCodes[22] = 22;KeysCodes[23] = 23;KeysCodes[24] = 24;</redp>
+</device>
+<device>
+<device_type>12</device_type>
+<dx_device_type>0</dx_device_type>
+<name>S2_Midi6_B11CB25CAB29</name>
+<redp>KeyOffset = 48;VelocityCorr = 4088;KeysCodes[0] = 0;KeysCodes[1] = 1;KeysCodes[2] = 2;KeysCodes[3] = 3;KeysCodes[4] = 4;KeysCodes[5] = 5;KeysCodes[6] = 6;KeysCodes[7] = 7;KeysCodes[8] = 8;KeysCodes[9] = 9;KeysCodes[10] = 10;KeysCodes[11] = 11;KeysCodes[12] = 12;KeysCodes[13] = 13;KeysCodes[14] = 14;KeysCodes[15] = 15;KeysCodes[16] = 16;KeysCodes[17] = 17;KeysCodes[18] = 18;KeysCodes[19] = 19;KeysCodes[20] = 20;KeysCodes[21] = 21;KeysCodes[22] = 22;KeysCodes[23] = 23;KeysCodes[24] = 24;</redp>
 </device>
 <device>
 <axis>
