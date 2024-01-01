@@ -36,19 +36,55 @@ L.Time = str2double(L.Time);
 firstPulse = find(L.("Event Type") == 'Pulse', 1);
 L.Onset = (L.Time-L.Time(firstPulse))/10000;
 
+% Remove (no longer needed) pulse events
+ispulse = L.("Event Type") == 'Pulse';
+L = L(~ispulse, :);
+
 %% Read custom file
 
 C = readtable(customfile, ReadVariableNames = false);
 C.Properties.VariableNames = ["Code","Response"];
 
+%% Calculate duration
+
+% Find all stimulus events
+isstimulus = L.("Event Type") == 'Picture';
+
+% Add response information from the custom file
+L(:, "Response") = {''};
+L(isstimulus, "Response") = C.Response;
+
+% Find all hit & miss events
+ishit = matches(L.Response,'LEFT') | matches(L.Response,'RIGHT');
+ismiss = matches(L.Response,'NONE');
+
+h = find(isstimulus & ishit);
+m = find(isstimulus & ismiss);
+
+% Calculate duration
+L(:, "Duration") = {NaN};
+L(h, "Duration") = L(h+1, "Onset") - L(h, "Onset"); % For hits, calculate time to first response
+L(m, "Duration") = {10}; % For misses, set duration to a fixed value
+
+% Remove (no longer needed) response events
+isresponse = L.("Event Type") == 'Response';
+L = L(~isresponse, :);
+
 %% Onsets & durations
 
-CET = L(startsWith(L.Code,'m') | startsWith(L.Code,'c'),:);
-dummy = L(startsWith(L.Code,'dl') | startsWith(L.Code,'dr'),:);
+CET = L((startsWith(L.Code,'m') | startsWith(L.Code,'c')) & ~matches(L.Response, 'NONE'), :);
+dummy = L((startsWith(L.Code,'dl') | startsWith(L.Code,'dr')) & ~matches(L.Response, 'NONE'), :);
+miss = L(matches(L.Response, 'NONE'), :);
 
-names = {'CET', 'dummy'};
-onsets = {CET.Onset, dummy.Onset};
-durations = {10, 10};
+if isempty(miss)
+    names = {'CET', 'dummy'};
+    onsets = {CET.Onset, dummy.Onset};
+    durations = {CET.Duration, dummy.Duration};
+else
+    names = {'CET', 'dummy', 'miss'};
+    onsets = {CET.Onset, dummy.Onset, miss.Onset};
+    durations = {CET.Duration, dummy.Duration, miss.Duration};
+end
 
 %% Parameters
 
@@ -63,8 +99,7 @@ dummy.Carbon = zeros(height(dummy),1);
 
 %% Save output
 
-% save(['./output/' subject '-multiple-conditions-cet.mat'], ...
-save('./output/multiple-conditions-cet.mat', ...
+save(['./output/' subject '-multiple-conditions-cet.mat'], ...
     'names', 'onsets', 'durations');
 
 clearvars -except study names onsets durations
