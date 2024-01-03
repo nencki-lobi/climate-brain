@@ -1,6 +1,5 @@
--- psql -U grieg --file ./code/ngr.sql
+-- psql -U grieg --csv --file ./code/ngr.sql 
 
-\f '|'
 \pset footer
 
 CREATE TEMP VIEW ngr AS
