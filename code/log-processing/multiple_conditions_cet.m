@@ -104,7 +104,7 @@ function multiple_conditions_cet(logdir, subject)
        mkdir(outdir)
     end
     
-    save(fullfile(outdir, [subject '-multiple-conditions-cet.mat']), ...
+    save(fullfile(outdir, ['sub-' subject '-multiple-conditions-cet.mat']), ...
         'names', 'onsets', 'durations');
     
     clearvars -except study names onsets durations

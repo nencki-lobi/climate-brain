@@ -46,9 +46,9 @@ function multiple_conditions_stories(logdir, subject, run)
     
     %% Onsets & durations
     
-    stories = L((startsWith(L.Code, EMO) | startsWith(L.Code, CON)),:);
-    isEMO = startsWith(stories.Code, EMO);
-    isCON = startsWith(stories.Code, CON);
+    stories = L((matches(L.Code, EMO) | matches(L.Code, CON)),:);
+    isEMO = matches(stories.Code, EMO);
+    isCON = matches(stories.Code, CON);
     
     questions = L(matches(L.Code, 'Valence'),:);
     
