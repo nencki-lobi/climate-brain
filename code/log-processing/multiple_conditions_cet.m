@@ -98,7 +98,7 @@ function multiple_conditions_cet(logdir, subject)
     
     %% Save output
 
-    outdir = './output/multiple-conditions-cet';
+    outdir = './code/first-level/multiple-conditions-cet';
 
     if ~exist(outdir, 'dir')
        mkdir(outdir)

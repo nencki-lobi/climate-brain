@@ -68,7 +68,7 @@ function multiple_conditions_stories(logdir, subject, run)
     
     %% Save output
 
-    outdir = './output/multiple-conditions-stories';
+    outdir = './code/first-level/multiple-conditions-stories';
 
     if ~exist(outdir, 'dir')
        mkdir(outdir)
