@@ -26,6 +26,32 @@ for s = 1:numel(subjects)
     multiple_conditions_cet(logdir, subject)
 end
 
+%% For CET part, visualise RTs for different event types
+
+indir = './code/first-level/multiple-conditions-cet';
+RT = nan(numel(subjects), 4);
+
+for s = 1:numel(subjects)
+    subject = subjects{s};
+    load(fullfile(indir, ['sub-' subject '-multiple-conditions-cet.mat']))
+
+    for i = 1:4
+        RT(s, i) = mean(durations{i});
+    end
+end
+
+histogram(RT(:,1))
+hold on
+histogram(RT(:,2))
+hold on
+histogram(RT(:,3))
+hold on
+histogram(RT(:,4))
+legend('CET', 'dummy', 'CET leftovers', 'dummy leftovers')
+
+saveas(gcf,'./output/cet-RTs-comparison.png')
+close all
+
 %% Clear workspace
 
 clearvars -except logdir subjects

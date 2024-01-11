@@ -45,6 +45,8 @@ function multiple_conditions_cet(logdir, subject)
     C.Properties.VariableNames = ["Code","Response"];
     
     %% Calculate duration
+
+    dur = 10; % trial duration
     
     % Find all stimulus events
     isstimulus = L.("Event Type") == 'Picture';
@@ -63,7 +65,7 @@ function multiple_conditions_cet(logdir, subject)
     % Calculate duration
     L(:, "Duration") = {NaN};
     L(h, "Duration") = L(h+1, "Onset") - L(h, "Onset"); % For hits, calculate time to first response
-    L(m, "Duration") = {10}; % For misses, set duration to a fixed value
+    L(m, "Duration") = {dur}; % For misses, set duration to a fixed value
     
     % Remove (no longer needed) response events
     isresponse = L.("Event Type") == 'Response';
@@ -76,13 +78,31 @@ function multiple_conditions_cet(logdir, subject)
     miss = L(matches(L.Response, 'NONE'), :);
     
     if isempty(miss)
-        names = {'CET', 'dummy'};
-        onsets = {CET.Onset, dummy.Onset};
-        durations = {CET.Duration, dummy.Duration};
+        names = {'CET', 'dummy', 'CET leftover', 'dummy leftover'};
+        onsets = {
+            CET.Onset
+            dummy.Onset
+            CET.Onset + CET.Duration
+            dummy.Onset + dummy.Duration}';
+        durations = {
+            CET.Duration
+            dummy.Duration
+            dur - CET.Duration
+            dur - dummy.Duration}';
     else
-        names = {'CET', 'dummy', 'miss'};
-        onsets = {CET.Onset, dummy.Onset, miss.Onset};
-        durations = {CET.Duration, dummy.Duration, miss.Duration};
+        names = {'CET', 'dummy', 'CET leftover', 'dummy leftover', 'miss'};
+        onsets = {
+            CET.Onset
+            dummy.Onset
+            CET.Onset + CET.Duration
+            dummy.Onset + dummy.Duration
+            miss.Onset}';
+        durations = {
+            CET.Duration
+            dummy.Duration
+            dur - CET.Duration
+            dur - dummy.Duration
+            miss.Duration}';
     end
     
     %% Parameters
