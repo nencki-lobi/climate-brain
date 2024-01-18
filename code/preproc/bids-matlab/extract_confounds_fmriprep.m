@@ -13,7 +13,7 @@ function extract_confounds_fmriprep(ipath, opath, task)
     space_label = 'MNI152NLin2009cAsym';
     
     % set up some regular expression to identify the confounds we want to keep
-    confounds_of_interest = {'^rot_[xyz]$', '^trans_[xyz]$', '^*outlier*$'};
+    confounds_of_interest = {'^rot_[xyz]$', '^trans_[xyz]$', '^a_comp_cor_0[012345]$', 'framewise_displacement', '^motion_outlier*'};
     
     % index the content of the fmriprep data set and figure out which subjects we
     % have
