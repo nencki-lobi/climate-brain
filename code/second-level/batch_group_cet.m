@@ -12,6 +12,8 @@ D = dir(fullfile(datadir,'sub-*'));
 D = D([D.isdir]);
 
 subjects = {D.name};
+exclude = {'sub-2112b', 'sub-2911e', 'sub-0712c','sub-0712b'};
+included_subjects = setdiff(subjects, exclude);
 
 nrun = 1; % enter the number of runs here
 
@@ -22,7 +24,7 @@ inputs = cell(2, nrun);
 
 for crun = 1:nrun
     inputs{1, crun} = {fullfile(resdir, 'group-cet-model')}; % Factorial design specification: Directory - cfg_files
-    inputs{2, crun} = strcat(resdir, '/', subjects, '/cet-model/con_0003.nii')'; % Factorial design specification: Scans - cfg_files
+    inputs{2, crun} = strcat(resdir, '/', included_subjects, '/cet-model/con_0003.nii')'; % Factorial design specification: Scans - cfg_files
     inputs{3, crun} = 'CET > dummy'; % Contrast Manager: Name - cfg_entry
 
     % inputs{1, crun} = {fullfile(resdir, 'group-dummy-model')}; % Factorial design specification: Directory - cfg_files

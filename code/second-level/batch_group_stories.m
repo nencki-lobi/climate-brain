@@ -9,16 +9,22 @@ basedir = fullfile(pwd, 'neurogrieg'); % git repo location
 datadir = fullfile(pwd, 'ds-ngr/bids/derivatives'); % fmriprep dataset location
 resdir = fullfile(pwd, 'ds-ngr/bids/results'); % output location
 
-% D = dir(fullfile(datadir,'sub-*'));
-% D = D([D.isdir]);
-% 
-% subjects = {D.name};
+D = dir(fullfile(datadir,'sub-*'));
+D = D([D.isdir]);
+
+subjects = {D.name};
+exclude = {'sub-2112b', 'sub-2911e', 'sub-0712c','sub-0712b'};
+included_subjects = setdiff(subjects, exclude);
 
 conditions = readtable(fullfile(basedir, '/output/condition-by-subject.csv'));
 
 ANG = strcat('sub-', conditions.code(matches(conditions.condition,'ANG')));
 HOP = strcat('sub-', conditions.code(matches(conditions.condition,'HOP')));
 NEU = strcat('sub-', conditions.code(matches(conditions.condition,'NEU')));
+
+ANG = intersect(ANG, included_subjects);
+HOP = intersect(HOP, included_subjects);
+NEU = intersect(NEU, included_subjects);
 
 nrun = 1; % enter the number of runs here
 
