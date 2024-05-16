@@ -65,6 +65,7 @@ function extract_confounds_fmriprep(ipath, opath, task)
     
           % for TSV
           new_content.(confounds_names{j}) = content.(confounds_names{j});
+          R(isnan(R))=0;
         end
     
         % save to mat and TSV
