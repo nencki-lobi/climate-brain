@@ -20,3 +20,12 @@ FROM ngr n
 LEFT JOIN choice c ON c.qid = n.qid AND c.ord = 0
 LEFT JOIN txt t ON t.qid = n.qid AND t.ord = 2
 ORDER BY sid;
+
+\o ./data/questionnaires/questionnaires.csv
+
+SELECT sid, code, q.name, c.ord, c.opt
+FROM ngr n
+LEFT JOIN qcopy q ON q.rid = n.sid
+LEFT JOIN choice c ON c.qid = q.qid
+WHERE q.name ~ '^(PCAE|PD|NRm|ICE)'
+ORDER BY sid, q.name, c.ord;
