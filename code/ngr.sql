@@ -4,24 +4,22 @@
 
 CREATE TEMP VIEW ngr AS
   SELECT 
-    s.sid, s.code, s.stid,
-    q.qid, q.name
+    s.sid, s.code, s.stid
   FROM subject s
   JOIN qcopy q ON q.rid = s.sid
   WHERE s.stid = 27
-   AND q.name = 'demo-3-pl' AND q.is_complete;
+   AND q.name ~ '^demo' AND q.is_complete;
 
-\o ./data/questionnaires/demo-by-subject.csv
+\o ./data/questionnaires/demographic.csv
 
-SELECT sid, code,
-       c.opt AS sex,
-       2023 - t.val :: INTEGER AS age
+SELECT sid, code, q.name, a.ord, a.val
 FROM ngr n
-LEFT JOIN choice c ON c.qid = n.qid AND c.ord = 0
-LEFT JOIN txt t ON t.qid = n.qid AND t.ord = 2
-ORDER BY sid;
+LEFT JOIN qcopy q ON q.rid = n.sid
+LEFT JOIN answer a ON a.qid = q.qid
+WHERE q.name ~ '^demo'
+ORDER BY sid, a.ord;
 
-\o ./data/questionnaires/questionnaires.csv
+\o ./data/questionnaires/psychometric.csv
 
 SELECT sid, code, q.name, c.ord, c.opt
 FROM ngr n
