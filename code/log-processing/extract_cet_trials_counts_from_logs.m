@@ -4,8 +4,8 @@ logdir = './data/logs/';
 
 %% Load questionnaire data
 
-qdata = readtable('./data/questionnaires/demo-by-subject.csv');
-qdata.Properties.VariableNames = ["sid","code","sex","age"];
+qdata = readtable('./data/questionnaires/subjects.csv');
+qdata.Properties.VariableNames = ["sid","code"];
 
 subjects = erase(qdata.code,'ngr');
 

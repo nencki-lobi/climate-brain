@@ -26,7 +26,7 @@ def trial2carbon(code):
     return c2c[pat[0]]
 
 
-ngr = pd.read_csv('../../data/questionnaires/demo-by-subject.csv')
+ngr = pd.read_csv('../../data/questionnaires/subjects.csv')
 subjects = ngr["code"].str.replace('ngr', '')
 
 dfl = []

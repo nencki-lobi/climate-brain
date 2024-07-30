@@ -10,6 +10,12 @@ CREATE TEMP VIEW ngr AS
   WHERE s.stid = 27
    AND q.name ~ '^demo' AND q.is_complete;
 
+\o ./data/questionnaires/subjects.csv
+
+SELECT sid, code 
+FROM ngr 
+ORDER BY sid;
+
 \o ./data/questionnaires/demographic.csv
 
 SELECT sid, code, q.name, a.ord, a.val

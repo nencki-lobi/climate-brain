@@ -52,7 +52,7 @@ def trial2category(code):
     return category
 
 
-ngr = pd.read_csv('../../data/questionnaires/demo-by-subject.csv')
+ngr = pd.read_csv('../../data/questionnaires/subjects.csv')
 subjects = ngr["code"].str.replace('ngr', '')
 
 runs = ['R1', 'R2', 'R3']
