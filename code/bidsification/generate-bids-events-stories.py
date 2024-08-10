@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 
 
-def log2df(logfile):
+def log2df(logfile, run):
 
     fname = os.path.basename(logfile)
     prefix = fname.split('-')[0]
@@ -16,6 +16,8 @@ def log2df(logfile):
                        header=None, skiprows=[0, 1, 2, 3],
                        usecols=[0, 2, 3, 4], names=['participant_id', 'event', 'trial_code', 'time'],
                        skipfooter=16, engine='python')
+
+    data.insert(1, "run", run)
 
     # Extra cleaning steps to handle special cases (fail messages, quit events)
     data = (data
@@ -38,8 +40,6 @@ def log2df(logfile):
         [isstory, isquestion],
         [data["trial_code"].apply(lambda x: code2type(x)), "Q"],
         default=np.nan)
-
-    data.insert(1, 'trial_type', data.pop('trial_type'))
 
     # Set onset
     first_pulse = data.query('event == "Pulse"').iloc[0]
@@ -69,7 +69,7 @@ def log2df(logfile):
 
     # Prepare output
     out = (data[isstory | isquestion]
-           .drop(columns=['event', 'time'])
+           .get(['participant_id', 'run', 'onset', 'duration', 'trial_type', 'trial_code', 'valence', 'arousal'])
            .sort_index())
 
     return out
@@ -104,14 +104,12 @@ os.makedirs('../../output/bids/stories-events', exist_ok=True)
 dfl = []
 for i, sub in enumerate(subjects):
     for j, r in enumerate(runs):
-        run = r
-        log = gl.glob('../../data/logs/' + sub + '*stories*' + run + '*.log')[0]
-        df = log2df(log)
-        df.insert(1, "run", run)
+        log = gl.glob('../../data/logs/' + sub + '*stories*' + r + '*.log')[0]
+        df = log2df(log, r)
         dfl.append(df)
         (df.drop(columns=['participant_id', 'run'])
          .to_csv('../../output/bids/stories-events/sub-' + sub + '_task-stories_run-0' + str(j+1) + '_events.tsv',
                  sep='\t', index=False))
 final = pd.concat(dfl)
 
-final.to_csv('../../output/bids/stories-events.tsv', sep='\t', index=False)
+final.to_csv('../../output/stories-events.tsv', sep='\t', index=False)

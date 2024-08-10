@@ -38,8 +38,6 @@ def log2df(logfile, customfile):
          "dummy"],
         default=np.nan)
 
-    data.insert(1, 'trial_type', data.pop('trial_type'))
-
     # Set onset
     first_pulse = data.query('event == "Pulse"').iloc[0]
     data['onset'] = (data['time'] - first_pulse['time']) / 10000
@@ -61,7 +59,7 @@ def log2df(logfile, customfile):
     # Prepare output
     out = (data
            .query('trial_code.str.match("^[mcd]")')
-           .drop(columns=['event', 'time'])
+           .get(['participant_id', 'onset', 'duration', 'trial_type', 'trial_code', 'response', 'RT', 'money', 'carbon'])
            )
 
     return out
@@ -96,4 +94,4 @@ for i, sub in enumerate(subjects):
      .to_csv('../../output/bids/cet-events/sub-' + sub + '_task-cet_events.tsv', sep='\t', index=False))
 final = pd.concat(dfl)
 
-final.to_csv('../../output/bids/cet-events.tsv', sep='\t', index=False)
+final.to_csv('../../output/cet-events.tsv', sep='\t', index=False)
