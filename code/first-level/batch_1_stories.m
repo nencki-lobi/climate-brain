@@ -9,6 +9,7 @@
 % fMRI model specification: Scans - cfg_files
 % fMRI model specification: Multiple conditions - cfg_files
 % fMRI model specification: Multiple regressors - cfg_files
+% fMRI model specification: Explicit mask - cfg_files
 
 workdir = pwd;
 basedir = fullfile(pwd, 'neurogrieg'); % git repo location
@@ -21,20 +22,21 @@ D = D([D.isdir]);
 subjects = {D.name};
 nrun = numel(subjects); % enter the number of runs here
 
-jobfile = {fullfile(basedir, 'code/first-level/batch_stories_job.m')};
+jobfile = {fullfile(basedir, 'code/first-level/batch_1_stories_job.m')};
 
 jobs = repmat(jobfile, 1, nrun);
-inputs = cell(10, nrun);
+inputs = cell(11, nrun);
 
 for crun = 1:nrun
 
     sub = subjects{crun};
 
-    mkdir(fullfile(resdir, sub, 'stories-model'))
+    mkdir(fullfile(resdir, sub, 'stories-1-model'))
 
     bold = 'space-MNI152NLin2009cAsym_desc-preproc_bold';
+    mask = 'space-MNI152NLin2009cAsym_desc-brain_mask';
 
-    inputs{1, crun} = {fullfile(resdir, sub, 'stories-model')}; % fMRI model specification: Directory - cfg_files
+    inputs{1, crun} = {fullfile(resdir, sub, 'stories-1-model')}; % fMRI model specification: Directory - cfg_files
     
     inputs{2, crun} = {fullfile(datadir, sub, 'func', ['s6', sub, '_task-stories_run-01_', bold, '.nii'])}; % fMRI model specification: Scans - cfg_files
     inputs{3, crun} = {fullfile(basedir, 'code/first-level/multiple-conditions-stories', 'multiple-conditions-stories-R1.mat')}; % fMRI model specification: Multiple conditions - cfg_files
@@ -47,6 +49,8 @@ for crun = 1:nrun
     inputs{8, crun} = {fullfile(datadir, sub, 'func', ['s6', sub, '_task-stories_run-03_', bold, '.nii'])}; % fMRI model specification: Scans - cfg_files
     inputs{9, crun} = {fullfile(basedir, 'code/first-level/multiple-conditions-stories', 'multiple-conditions-stories-R3.mat')}; % fMRI model specification: Multiple conditions - cfg_files
     inputs{10, crun} = {fullfile(resdir, sub, 'stats', [sub, '_task-stories_run-03_confounds.mat'])}; % fMRI model specification: Multiple regressors - cfg_files
+    inputs{11, crun} = {fullfile(datadir, sub, 'func', [sub, '_task-stories_', mask, '.nii'])}; % fMRI model specification: Explicit mask - cfg_files
+
 end
 
 spm('defaults', 'FMRI');
