@@ -1,8 +1,16 @@
 # Import dependencies
+
 import os
 import glob as gl
 import pandas as pd
 import numpy as np
+
+# Set paths
+
+workdir = os.environ['HOME']
+bidsdir = os.path.join(workdir, 'ds-ngr/bids')
+
+# Define functions
 
 
 def log2df(logfile, run):
@@ -99,16 +107,16 @@ subjects = ngr["code"].str.replace('ngr', '')
 
 runs = ['R1', 'R2', 'R3']
 
-os.makedirs('../../output/bids/stories-events', exist_ok=True)
-
 dfl = []
 for i, sub in enumerate(subjects):
+    subdir = 'sub-' + sub
+    os.makedirs(os.path.join(bidsdir, subdir), exist_ok=True)
     for j, r in enumerate(runs):
         log = gl.glob('../../data/logs/' + sub + '*stories*' + r + '*.log')[0]
         df = log2df(log, r)
         dfl.append(df)
         (df.drop(columns=['participant_id', 'run'])
-         .to_csv('../../output/bids/stories-events/sub-' + sub + '_task-stories_run-0' + str(j+1) + '_events.tsv',
+         .to_csv(os.path.join(bidsdir, subdir, 'sub-' + sub + '_task-stories_run-0' + str(j+1) + '_events.tsv'),
                  sep='\t', index=False))
 final = pd.concat(dfl)
 

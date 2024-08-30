@@ -1,9 +1,17 @@
 # Import dependencies
+
 import os
 import glob as gl
 import pandas as pd
 import numpy as np
 import re
+
+# Set paths
+
+workdir = os.environ['HOME']
+bidsdir = os.path.join(workdir, 'ds-ngr/bids')
+
+# Define functions
 
 
 def log2df(logfile, customfile):
@@ -82,16 +90,16 @@ def trial2carbon(code):
 ngr = pd.read_csv('../../data/questionnaires/subjects.csv')
 subjects = ngr["code"].str.replace('ngr', '')
 
-os.makedirs('../../output/bids/cet-events', exist_ok=True)
-
 dfl = []
 for i, sub in enumerate(subjects):
+    subdir = 'sub-' + sub
+    os.makedirs(os.path.join(bidsdir, subdir), exist_ok=True)
     log = gl.glob('../../data/logs/' + sub + '*cet*.log')[0]
     custom = gl.glob('../../data/logs/' + sub + '*cet*custom.txt')[0]
     df = log2df(log, custom)
     dfl.append(df)
     (df.drop(columns=['participant_id'])
-     .to_csv('../../output/bids/cet-events/sub-' + sub + '_task-cet_events.tsv', sep='\t', index=False))
+     .to_csv(os.path.join(bidsdir, subdir, 'sub-' + sub + '_task-cet_events.tsv'), sep='\t', index=False))
 final = pd.concat(dfl)
 
 final.to_csv('../../output/cet-events.tsv', sep='\t', index=False)

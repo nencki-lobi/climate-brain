@@ -3,6 +3,11 @@
 import json
 import os
 
+# Set paths
+
+workdir = os.environ['HOME']
+bidsdir = os.path.join(workdir, 'ds-ngr/bids')
+
 # Define functions
 
 def add_entry(data, key, description, levels_or_units):
@@ -88,7 +93,5 @@ for key, description, levels_or_units in entries:
 
 # Save output as a nicely formatted JSON file
 
-os.makedirs('../../output/bids', exist_ok=True)
-
-with open('../../output/bids/participants.json', "w") as file:
+with open(os.path.join(bidsdir, 'participants.json'), "w") as file:
     json.dump(final, file, indent=4)

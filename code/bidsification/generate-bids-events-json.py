@@ -3,6 +3,11 @@
 import json
 import os
 
+# Set paths
+
+workdir = os.environ['HOME']
+bidsdir = os.path.join(workdir, 'ds-ngr/bids')
+
 # Define functions
 
 
@@ -69,9 +74,6 @@ entries_cet = [
 
 # Generate JSON files
 
-opath = '../../output/bids/'
-os.makedirs(opath, exist_ok=True)
-
-make_json(entries_stories, opath + 'stories-events.json')
-make_json(entries_cet, opath + 'cet-events.json')
+make_json(entries_stories, os.path.join(bidsdir, 'task-stories_events.json'))
+make_json(entries_cet, os.path.join(bidsdir, 'task-cet_events.json'))
 

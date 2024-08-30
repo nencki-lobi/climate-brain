@@ -3,6 +3,11 @@
 import pandas as pd
 import os
 
+# Set paths
+
+workdir = os.environ['HOME']
+bidsdir = os.path.join(workdir, 'ds-ngr/bids')
+
 # Load subjects
 
 subjects = pd.read_csv('../../output/condition-by-subject.csv')
@@ -68,6 +73,4 @@ final = pd.concat(dfs, join='outer', axis=1)
 final = final.add_prefix('sub-', axis=0)
 final = final.reset_index(names=['participant_id'])
 
-os.makedirs('../../output/bids', exist_ok=True)
-
-final.to_csv('../../output/bids/participants.tsv', sep='\t', index=False)
+final.to_csv(os.path.join(bidsdir, 'participants.tsv'), sep='\t', index=False)
