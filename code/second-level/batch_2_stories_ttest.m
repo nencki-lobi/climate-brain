@@ -15,7 +15,7 @@ D = dir(fullfile(datadir,'sub-*'));
 D = D([D.isdir]);
 
 subjects = {D.name};
-exclude = {'sub-2112b', 'sub-2911e', 'sub-0712c','sub-0712b'}; % exclude subjects with excessive movement
+exclude = {'sub-2112b', 'sub-2911e', 'sub-0712c', 'sub-0712b'}; % exclude subjects with excessive movement
 included_subjects = setdiff(subjects, exclude);
 
 %% Define groups
@@ -70,10 +70,9 @@ for g = 1:length(groups)
 
     % Run the SPM job for the current group
     spm('defaults', 'FMRI');
-    %spm_jobman('run', jobs, inputs{:});
+    spm_jobman('run', jobs, inputs{:});
 
 end
 
 cd(workdir)
 clearvars -except workdir subjects inputs
-

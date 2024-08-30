@@ -2,8 +2,8 @@
 % Factorial design specification: Directory - cfg_files
 % Factorial design specification: Scans - cfg_files
 % Factorial design specification: Vector - cfg_entry
-% Contrast Manager: Name - cfg_entry
 % Factorial design specification: Explicit Mask - cfg_files
+% Contrast Manager: Name - cfg_entry
 
 workdir = pwd;
 basedir = fullfile(pwd, 'neurogrieg'); % git repo location
@@ -15,11 +15,11 @@ D = dir(fullfile(datadir,'sub-*'));
 D = D([D.isdir]);
 
 subjects = {D.name};
-exclude = {'sub-2112b', 'sub-2911e', 'sub-0712c','sub-0712b'}; % exclude subjects with excessive movement
+exclude = {'sub-2112b', 'sub-2911e', 'sub-0712c', 'sub-0712b'}; % exclude subjects with excessive movement
 included_subjects = setdiff(subjects, exclude);
 
 %% Extract framewise displacement values
-task = 'stories'; % Adjust here!
+task = 'cet'; % Adjust here!
 
 mriqc = fullfile(datadir, 'mriqc/group_bold.tsv');
 
@@ -42,13 +42,12 @@ jobfile = {fullfile(basedir, 'code/second-level/batch_2_cet_job.m')};
 jobs = repmat(jobfile, 1, nrun);
 inputs = cell(5, nrun);
 
-
 for crun = 1:nrun
     inputs{1, crun} = {fullfile(resdir, 'cet-2-model')}; % Factorial design specification: Directory - cfg_files
     inputs{2, crun} = strcat(resdir, '/', included_subjects, '/cet-1-model/con_0003.nii')'; % Factorial design specification: Scans - cfg_files
-    inputs{3, crun} = fd(included_subjects);% Factorial design specification: Vector - cfg_entry
+    inputs{3, crun} = fd(included_subjects); % Factorial design specification: Vector - cfg_entry
     inputs{4, crun} =  {fullfile(basedir, 'code/second-level/tpm_grey_0.20.nii')}; % Factorial design specification: Explicit Mask - cfg_files'
-    inputs{5, crun} = CET > dummy'; % Contrast Manager: Name - cfg_entry
+    inputs{5, crun} = 'CET > dummy'; % Contrast Manager: Name - cfg_entry
 end
 
 spm('defaults', 'FMRI');
