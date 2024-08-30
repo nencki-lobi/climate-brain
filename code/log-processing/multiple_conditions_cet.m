@@ -1,4 +1,4 @@
-function multiple_conditions_cet(events, subject)
+function multiple_conditions_cet(events, subject, outdir)
 
     %% Define events
     
@@ -37,8 +37,6 @@ function multiple_conditions_cet(events, subject)
     end
 
     %% Save output
-
-    outdir = './code/first-level/multiple-conditions-cet';
 
     if ~exist(outdir, 'dir')
        mkdir(outdir)

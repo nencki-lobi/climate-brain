@@ -110,13 +110,13 @@ runs = ['R1', 'R2', 'R3']
 dfl = []
 for i, sub in enumerate(subjects):
     subdir = 'sub-' + sub
-    os.makedirs(os.path.join(bidsdir, subdir), exist_ok=True)
+    os.makedirs(os.path.join(bidsdir, subdir, 'func'), exist_ok=True)
     for j, r in enumerate(runs):
         log = gl.glob('../../data/logs/' + sub + '*stories*' + r + '*.log')[0]
         df = log2df(log, r)
         dfl.append(df)
         (df.drop(columns=['participant_id', 'run'])
-         .to_csv(os.path.join(bidsdir, subdir, 'sub-' + sub + '_task-stories_run-0' + str(j+1) + '_events.tsv'),
+         .to_csv(os.path.join(bidsdir, subdir, 'func', 'sub-' + sub + '_task-stories_run-0' + str(j+1) + '_events.tsv'),
                  sep='\t', index=False))
 final = pd.concat(dfl)
 

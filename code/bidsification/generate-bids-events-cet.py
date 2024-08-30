@@ -93,13 +93,13 @@ subjects = ngr["code"].str.replace('ngr', '')
 dfl = []
 for i, sub in enumerate(subjects):
     subdir = 'sub-' + sub
-    os.makedirs(os.path.join(bidsdir, subdir), exist_ok=True)
+    os.makedirs(os.path.join(bidsdir, subdir, 'func'), exist_ok=True)
     log = gl.glob('../../data/logs/' + sub + '*cet*.log')[0]
     custom = gl.glob('../../data/logs/' + sub + '*cet*custom.txt')[0]
     df = log2df(log, custom)
     dfl.append(df)
     (df.drop(columns=['participant_id'])
-     .to_csv(os.path.join(bidsdir, subdir, 'sub-' + sub + '_task-cet_events.tsv'), sep='\t', index=False))
+     .to_csv(os.path.join(bidsdir, subdir, 'func', 'sub-' + sub + '_task-cet_events.tsv'), sep='\t', index=False))
 final = pd.concat(dfl)
 
 final.to_csv('../../output/cet-events.tsv', sep='\t', index=False)

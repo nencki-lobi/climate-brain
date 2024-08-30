@@ -1,4 +1,4 @@
-function multiple_conditions_stories(events, run)
+function multiple_conditions_stories(events, run, outdir)
     
     %% Define events
 
@@ -13,8 +13,6 @@ function multiple_conditions_stories(events, run)
     durations = {15, 15, 11};
     
     %% Save output
-
-    outdir = './code/first-level/multiple-conditions-stories';
 
     if ~exist(outdir, 'dir')
        mkdir(outdir)
