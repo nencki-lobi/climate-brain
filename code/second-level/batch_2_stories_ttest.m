@@ -64,7 +64,7 @@ for g = 1:length(groups)
         inputs{1, crun} = {fullfile(resdir, ['stories-2-model-ttest_', group_name])}; % Factorial design specification: Directory - cfg_files
         inputs{2, crun} = strcat(resdir, '/', subjects_in_group, '/stories-1-model/con_0001.nii'); % Factorial design specification: Scans - cfg_files
         inputs{3, crun} = fd(subjects_in_group)'; % Factorial design specification: Vector - cfg_entry
-        inputs{4, crun} = {fullfile(basedir, 'code/second-level/tpm_grey_0.20.nii')}; % Factorial design specification: Explicit Mask - cfg_files
+        inputs{4, crun} = {fullfile(datadir, 'TPM_mask.nii')}; % Factorial design specification: Explicit Mask - cfg_files
         inputs{5,crun} = group_name; % Contrast Manager: Name - cfg_entry
     end
 

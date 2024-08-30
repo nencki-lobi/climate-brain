@@ -46,7 +46,7 @@ for crun = 1:nrun
     inputs{1, crun} = {fullfile(resdir, 'cet-2-model')}; % Factorial design specification: Directory - cfg_files
     inputs{2, crun} = strcat(resdir, '/', included_subjects, '/cet-1-model/con_0003.nii')'; % Factorial design specification: Scans - cfg_files
     inputs{3, crun} = fd(included_subjects); % Factorial design specification: Vector - cfg_entry
-    inputs{4, crun} =  {fullfile(basedir, 'code/second-level/tpm_grey_0.20.nii')}; % Factorial design specification: Explicit Mask - cfg_files'
+    inputs{4, crun} = {fullfile(datadir, 'TPM_mask.nii')}; % Factorial design specification: Explicit Mask - cfg_files'
     inputs{5, crun} = 'CET > dummy'; % Contrast Manager: Name - cfg_entry
 end
 
