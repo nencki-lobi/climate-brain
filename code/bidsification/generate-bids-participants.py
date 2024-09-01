@@ -73,4 +73,4 @@ final = pd.concat(dfs, join='outer', axis=1)
 final = final.add_prefix('sub-', axis=0)
 final = final.reset_index(names=['participant_id'])
 
-final.to_csv(os.path.join(bidsdir, 'participants.tsv'), sep='\t', index=False)
+final.to_csv(os.path.join(bidsdir, 'participants.tsv'), na_rep='n/a', sep='\t', index=False)
