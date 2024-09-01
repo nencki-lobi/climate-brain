@@ -1,10 +1,9 @@
-
-workdir = pwd;
-datadir = fullfile(pwd, 'ds-ngr/bids/derivatives'); % fmriprep dataset location
-resdir = fullfile(pwd, 'ds-ngr/bids/results'); % output location
+%% Generate multiple regressors MAT files for each subject
 
 extract_confounds_fmriprep(datadir, resdir, 'stories')
 extract_confounds_fmriprep(datadir, resdir, 'cet')
 
+%% Clear workspace
+
 cd(workdir)
-clearvars -except workdir
+clearvars -except workdir basedir bidsdir datadir resdir spmdir

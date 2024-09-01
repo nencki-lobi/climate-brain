@@ -4,15 +4,15 @@
 % Image Calculator: Output Filename - cfg_entry
 % Image Calculator: Output Directory - cfg_files
 
-workdir = pwd;
-basedir = fullfile(pwd, 'neurogrieg'); % git repo location
-datadir = fullfile(pwd, 'ds-ngr/bids/derivatives'); % fmriprep dataset location
-resdir = fullfile(pwd, 'ds-ngr/bids/results'); % output location
+%% Define subjects
 
 D = dir(fullfile(datadir,'sub-*'));
 D = D([D.isdir]);
 
 subjects = {D.name};
+
+%% Run job
+
 nrun = numel(subjects); % enter the number of runs here
 
 jobfile = {fullfile(basedir, 'code/first-level/prepare_1_masks_job.m')};
@@ -40,5 +40,7 @@ end
 spm('defaults', 'FMRI');
 spm_jobman('run', jobs, inputs{:});
 
+%% Clear workspace
+
 cd(workdir)
-clearvars -except workdir subjects inputs
+clearvars -except workdir basedir bidsdir datadir resdir spmdir

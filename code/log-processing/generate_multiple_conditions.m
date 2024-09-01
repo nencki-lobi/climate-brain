@@ -1,9 +1,3 @@
-%% Initial setup
-
-workdir = pwd;
-basedir = fullfile(pwd, 'neurogrieg'); % git repo location
-bidsdir = fullfile(pwd, 'ds-ngr/bids'); % BIDS dataset location
-
 %% Load a list of subject identifiers
 
 qdata = readtable(fullfile(basedir, 'data/questionnaires/subjects.csv'));
@@ -25,7 +19,7 @@ for r = 1:3
 
     events = readtable( ...
         fullfile(bidsdir, subdir, 'func', ['sub-' subject '_task-stories_run-0' num2str(r) '_events.tsv']), ...
-        "FileType","text",'Delimiter', '\t');
+        'FileType', 'text', 'Delimiter', '\t');
 
     multiple_conditions_stories(events, run, outdir)
 end
@@ -41,11 +35,12 @@ for s = 1:numel(subjects)
 
     events = readtable( ...
         fullfile(bidsdir, subdir, 'func', ['sub-' subject '_task-cet_events.tsv']), ...
-        "FileType","text",'Delimiter', '\t');
+        'FileType', 'text', 'Delimiter', '\t');
 
     multiple_conditions_cet(events, subject, outdir)
 end
 
 %% Clear workspace
 
-clearvars -except subjects
+cd(workdir)
+clearvars -except workdir basedir bidsdir datadir resdir spmdir

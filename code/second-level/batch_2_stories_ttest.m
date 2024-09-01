@@ -5,12 +5,8 @@
 % Factorial design specification: Explicit Mask - cfg_files
 % Contrast Manager: Name - cfg_entry
 
-workdir = pwd;
-basedir = fullfile(pwd, 'neurogrieg'); % git repo location
-datadir = fullfile(pwd, 'ds-ngr/bids/derivatives'); % fmriprep dataset location
-resdir = fullfile(pwd, 'ds-ngr/bids/results'); % output location
-
 %% Define subjects
+
 D = dir(fullfile(datadir,'sub-*'));
 D = D([D.isdir]);
 
@@ -19,6 +15,7 @@ exclude = {'sub-2112b', 'sub-2911e', 'sub-0712c', 'sub-0712b'}; % exclude subjec
 included_subjects = setdiff(subjects, exclude);
 
 %% Define groups
+
 conditions = readtable(fullfile(basedir, '/output/condition-by-subject.csv'));
 
 ANG = strcat('sub-', conditions.code(matches(conditions.condition,'ANG')));
@@ -33,6 +30,7 @@ groups = {'ANG', 'HOP', 'NEU'};
 group_subjects = {ANG, HOP, NEU};
 
 %% Extract framewise displacement values
+
 task = 'stories'; % Adjust here!
 
 mriqc = fullfile(datadir, 'mriqc/group_bold.tsv');
@@ -49,6 +47,7 @@ G.Properties.VariableNames = {'subject', 'count', 'fd'};
 fd = dictionary(G.subject, G.fd);
 
 %% Run job
+
 nrun = 1; % enter the number of runs here
 
 jobfile = {fullfile(basedir, 'code/second-level/batch_2_stories_ttest_job.m')};
@@ -74,5 +73,7 @@ for g = 1:length(groups)
 
 end
 
+%% Clear workspace
+
 cd(workdir)
-clearvars -except workdir subjects inputs
+clearvars -except workdir basedir bidsdir datadir resdir spmdir

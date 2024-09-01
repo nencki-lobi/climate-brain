@@ -5,12 +5,8 @@
 % Factorial design specification: Explicit Mask - cfg_files
 % Contrast Manager: Name - cfg_entry
 
-workdir = pwd;
-basedir = fullfile(pwd, 'neurogrieg'); % git repo location
-datadir = fullfile(pwd, 'ds-ngr/bids/derivatives'); % fmriprep dataset location
-resdir = fullfile(pwd, 'ds-ngr/bids/results'); % output location
-
 %% Define subjects
+
 D = dir(fullfile(datadir,'sub-*'));
 D = D([D.isdir]);
 
@@ -19,6 +15,7 @@ exclude = {'sub-2112b', 'sub-2911e', 'sub-0712c', 'sub-0712b'}; % exclude subjec
 included_subjects = setdiff(subjects, exclude);
 
 %% Extract framewise displacement values
+
 task = 'cet'; % Adjust here!
 
 mriqc = fullfile(datadir, 'mriqc/group_bold.tsv');
@@ -35,6 +32,7 @@ G.Properties.VariableNames = {'subject', 'count', 'fd'};
 fd = dictionary(G.subject, G.fd);
 
 %% Run job
+
 nrun = 1; % enter the number of runs here
 
 jobfile = {fullfile(basedir, 'code/second-level/batch_2_cet_job.m')};
@@ -53,5 +51,7 @@ end
 spm('defaults', 'FMRI');
 spm_jobman('run', jobs, inputs{:});
 
+%% Clear workspace
+
 cd(workdir)
-clearvars -except workdir subjects inputs
+clearvars -except workdir basedir bidsdir datadir resdir spmdir

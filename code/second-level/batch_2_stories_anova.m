@@ -6,12 +6,8 @@
 % Factorial design specification: Vector - cfg_entry
 % Factorial design specification: Explicit Mask - cfg_files
 
-workdir = pwd;
-basedir = fullfile(pwd, 'neurogrieg'); % git repo location
-datadir = fullfile(pwd, 'ds-ngr/bids/derivatives'); % fmriprep dataset location
-resdir = fullfile(pwd, 'ds-ngr/bids/results'); % output location
-
 %% Define subjects
+
 D = dir(fullfile(datadir,'sub-*'));
 D = D([D.isdir]);
 
@@ -20,6 +16,7 @@ exclude = {'sub-2112b', 'sub-2911e', 'sub-0712c', 'sub-0712b'}; % exclude subjec
 included_subjects = setdiff(subjects, exclude);
 
 %% Define groups
+
 conditions = readtable(fullfile(basedir, '/output/condition-by-subject.csv'));
 
 ANG = strcat('sub-', conditions.code(matches(conditions.condition,'ANG')));
@@ -31,6 +28,7 @@ HOP = intersect(HOP, included_subjects);
 NEU = intersect(NEU, included_subjects);
 
 %% Extract framewise displacement values
+
 task = 'stories'; % Adjust here!
 
 mriqc = fullfile(datadir, 'mriqc/group_bold.tsv');
@@ -47,6 +45,7 @@ G.Properties.VariableNames = {'subject', 'count', 'fd'};
 fd = dictionary(G.subject, G.fd);
 
 %% Run job
+
 nrun = 1; % enter the number of runs here
 
 jobfile = {fullfile(basedir, 'code/second-level/batch_2_stories_anova_job.m')};
@@ -66,5 +65,7 @@ end
 spm('defaults', 'FMRI');
 spm_jobman('run', jobs, inputs{:});
 
+%% Clear workspace
+
 cd(workdir)
-clearvars -except workdir subjects inputs
+clearvars -except workdir basedir bidsdir datadir resdir spmdir

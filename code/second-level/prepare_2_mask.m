@@ -2,12 +2,7 @@
 % Image Calculator: Input Images - cfg_files
 % Image Calculator: Output Directory - cfg_files
 
-workdir = pwd;
-basedir = fullfile(pwd, 'neurogrieg'); % git repo location
-datadir = fullfile(pwd, 'ds-ngr/bids/derivatives'); % fmriprep dataset location
-resdir = fullfile(pwd, 'ds-ngr/bids/results'); % output location
-
-[spmdir, ~, ~] = fileparts(which('spm')); % SPM location
+%% Run job
 
 nrun = 1; % enter the number of runs here
 
@@ -24,5 +19,7 @@ end
 spm('defaults', 'FMRI');
 spm_jobman('run', jobs, inputs{:});
 
+%% Clear workspace
+
 cd(workdir)
-clearvars -except workdir inputs
+clearvars -except workdir basedir bidsdir datadir resdir spmdir
