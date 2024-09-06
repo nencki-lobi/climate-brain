@@ -8,5 +8,11 @@
 # Matlab
 *.mat
 
+# R
+.Rhistory
+.RData
+*.Rproj
+.Rproj.user/
+
 # Misc
 output/
