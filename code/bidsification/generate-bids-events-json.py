@@ -56,8 +56,8 @@ entries_cet = [
     ("trial_code",
      "Trial code (unique identifier). "
      "In target trials, the trial code starts with `m` or `c`. "
-     "If it starts with `m`, monetary reward was presented on the left and CO2 emission on the right of the screen. "
-     "If if starts with `c`, CO2 emission was presented on the left and monetary reward on the right of the screen. "
+     "If it starts with `m`, monetary bonus was presented on the left and CO2 emission on the right of the screen. "
+     "If if starts with `c`, CO2 emission was presented on the left and monetary bonus on the right of the screen. "
      "In the dummy trials, the trial code starts with `dl` or `dr`. "
      "If it starts with `dl`, the participant was asked to select the option on the left of the screen. "
      "If it starts with `dr`, the participant was asked to select the option on the right of the screen.",
@@ -66,7 +66,7 @@ entries_cet = [
      {"LEFT": "Participant selected option on the left",
       "RIGHT": "Participant selected option on the right"}),
     ("RT", "Response time, as measured from the onset of the trial", "Seconds"),
-    ("money", "Monetary reward that could be gained by the participant",
+    ("money", "Monetary bonus that could be gained by the participant",
      "Polish zloty"),
     ("carbon", "Amount of CO2 emission that could be reduced by the participant",
      "Kilograms (kg)")
