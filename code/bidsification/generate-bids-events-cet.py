@@ -9,7 +9,7 @@ import re
 # Set paths
 
 workdir = os.environ['HOME']
-bidsdir = os.path.join(workdir, 'ds-ngr/bids')
+bidsdir = os.path.join(workdir, 'bids-wannabe') # location of a dataset we want to bidsify
 
 # Define functions
 
