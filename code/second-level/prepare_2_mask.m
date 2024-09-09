@@ -13,7 +13,7 @@ inputs = cell(2, nrun);
 
 for crun = 1:nrun
     inputs{1, crun} = {fullfile(spmdir, 'tpm/TPM.nii,1')}; % Image Calculator: Input Images - cfg_files
-    inputs{2, crun} = {datadir}; % Image Calculator: Output Directory - cfg_files
+    inputs{2, crun} = {fullfile(bidsdir, 'derivatives')}; % Image Calculator: Output Directory - cfg_files
 end
 
 spm('defaults', 'FMRI');

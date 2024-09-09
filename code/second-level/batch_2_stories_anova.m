@@ -31,7 +31,7 @@ NEU = intersect(NEU, included_subjects);
 
 task = 'stories'; % Adjust here!
 
-mriqc = fullfile(datadir, 'mriqc/group_bold.tsv');
+mriqc = fullfile(bidsdir, 'derivatives/mriqc/group_bold.tsv');
 
 T = readtable(mriqc, 'FileType', 'text', 'Delimiter', '\t');
 T = T(contains(T.bids_name, task), ["bids_name", "fd_mean"]);
@@ -59,7 +59,7 @@ for crun = 1:nrun
     inputs{3, crun} = strcat(resdir, '/', HOP, '/stories-1-model/con_0004.nii'); % Factorial design specification: Scans - cfg_files
     inputs{4, crun} = strcat(resdir, '/', NEU, '/stories-1-model/con_0004.nii'); % Factorial design specification: Scans - cfg_files
     inputs{5, crun} = [fd(ANG); fd(HOP); fd(NEU)]'; % Factorial design specification: Vector - cfg_entry
-    inputs{6, crun} = {fullfile(datadir, 'TPM_mask.nii')}; % Factorial design specification: Explicit Mask - cfg_files
+    inputs{6, crun} = {fullfile(bidsdir, 'derivatives/TPM_mask.nii')}; % Factorial design specification: Explicit Mask - cfg_files
 end
 
 spm('defaults', 'FMRI');

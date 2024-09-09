@@ -15,9 +15,9 @@ workdir = getenv('HOME');
 % same parent directory `workdir`. If your local setup is different, you
 % can create symlinks to mimic the required setup.
 
-basedir = fullfile(workdir, 'neurogrieg'); % git repo location
-bidsdir = fullfile(workdir, 'ds-ngr/bids'); % BIDS dataset location
-datadir = fullfile(bidsdir, 'derivatives'); % fmriprep derivatives location
+basedir = fullfile(workdir, 'climate-brain'); % git repo location
+bidsdir = fullfile(workdir, 'ds005460'); % BIDS dataset location
+datadir = fullfile(bidsdir, 'derivatives/fmriprep'); % fmriprep derivatives location
 resdir = fullfile(bidsdir, 'results'); % output location
 
 [spmdir, ~, ~] = fileparts(which('spm')); % SPM location
