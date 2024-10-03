@@ -2,9 +2,17 @@
 
 This repository contains supplementary materials associated with the development of the **CLIMATE BRAIN** dataset. The dataset itself is publicly available on [OpenNeuro](https://openneuro.org), under the accession number [ds005460](https://openneuro.org/datasets/ds005460).
 
-Please cite the corresponding resource when using these materials:
+## How to acknowledge
 
-> Zaremba, D., Kossowski, B., Wypych, M., Jednoróg, K., Michałowski, J. M., Klöckner, C. A., Wierzba, M., & Marchewka, A. (2024) CLIMATE BRAIN - Questionnaires, tasks and the neuroimaging dataset. OpenNeuro. [Dataset] doi: [TBA]()
+Please cite the corresponding sources when using the dataset or the associated materials.
+
+- OpenNeuro dataset:
+
+	> Zaremba, D., Kossowski, B., Wypych, M., Jednoróg, K., Michałowski, J. M., Klöckner, C. A., Wierzba, M., & Marchewka, A. (2024) CLIMATE BRAIN - Questionnaires, tasks and the neuroimaging dataset. OpenNeuro. [Dataset] [doi:10.18112/openneuro.ds005460.v1.0.0](https://openneuro.org/datasets/ds005460)
+
+- Preprint:
+
+	> Zaremba, D., Kossowski, B., Wypych, M., Jednoróg, K., Michałowski, J. M., Klöckner, C. A., Wierzba, M., & Marchewka, A. (2024) CLIMATE BRAIN - Questionnaires, tasks and the neuroimaging dataset. bioRxiv. https://doi.org/10.1101/2024.09.12.612592
 
 ## How to use
 
