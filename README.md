@@ -44,9 +44,9 @@ ln -s $STORAGE/ds005460 ds005460
 ```
 
 Use the following scripts:
-- `climate-brain.R` to reproduce the behavioural results. This step requires [R](https://www.r-project.org).
-- `climate-brain.m` to reproduce the neuroimaging results. This step requires [MATLAB](https://www.mathworks.com/products/matlab.html), [SPM12](https://www.fil.ion.ucl.ac.uk/spm/software/spm12), and [BIDS-Matlab](https://github.com/bids-standard/bids-matlab).
-- `climate-brain.ipynb` to visualise the neuroimaging results. This step requires [Python](https://www.python.org), [Jupyter Notebook](https://jupyter.org), and [Nilearn](https://nilearn.github.io).
+- `climate_brain.R` to reproduce the behavioural results. This step requires [R](https://www.r-project.org).
+- `climate_brain.m` to reproduce the neuroimaging results. This step requires [MATLAB](https://www.mathworks.com/products/matlab.html), [SPM12](https://www.fil.ion.ucl.ac.uk/spm/software/spm12), and [BIDS-Matlab](https://github.com/bids-standard/bids-matlab).
+- `climate_brain.ipynb` to visualise the neuroimaging results. This step requires [Python](https://www.python.org), [Jupyter Notebook](https://jupyter.org), and [Nilearn](https://nilearn.github.io).
 
 
 ## Funding
