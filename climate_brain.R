@@ -26,6 +26,7 @@ if (!dir.exists(output_dir)) {
 
 participants = read.table(file.path(bidsdir, "participants.tsv"), na.strings = "n/a", header = T, sep = "\t", quote = "", encoding = "UTF-8")
 participants_json = fromJSON(file.path(bidsdir, "participants.json"))
+texts = read.table(file.path(basedir, "data/stories-texts.tsv"), header = T, sep = "\t", quote = "", encoding = "UTF-8")
 stories = read.table(file.path(basedir, "output/stories-events.tsv"), header = T, sep = "\t", quote = "", encoding = "UTF-8")
 cet = read.table(file.path(basedir, "output/cet-events.tsv"), header = T, sep = "\t", quote = "", encoding = "UTF-8")
 
@@ -135,6 +136,13 @@ descriptives_numerical = describeBy(participants[numerical_vars], participants$c
   separate_wider_delim(variable, delim = ".", names = c("condition", "variable")) %>%
   arrange(variable, condition)
 write.csv(descriptives_numerical, file = file.path(output_dir, "descriptives_numerical.csv"), row.names = FALSE)
+
+text_len = texts %>%
+  group_by(type) %>% 
+  summarise(mean_leng = mean(leng, na.rm = TRUE),
+            sd_leng = sd(leng, na.rm = TRUE))
+text_diff = aov(leng ~ type, data = texts)
+summary(text_diff)
 
 ## RRES table
 
