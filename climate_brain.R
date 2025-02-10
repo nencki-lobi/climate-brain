@@ -6,6 +6,7 @@ library(jsonlite)
 library(psych)
 library(report)
 library(tidyverse)
+library(jmv)
 
 # Set paths
 
@@ -118,9 +119,18 @@ run_anova = function(variable) {
     mutate(variable = variable)
 }
 
-# Analyses & plots
+# Analyses
 
-## Descriptives table
+## Stimuli
+
+text_len = texts %>%
+  group_by(type) %>% 
+  summarise(mean_leng = mean(leng, na.rm = TRUE),
+            sd_leng = sd(leng, na.rm = TRUE))
+text_diff = aov(leng ~ type, data = texts)
+summary(text_diff)
+
+## Descriptives
 
 descriptives_categorical = participants %>%
   select(condition, all_of(categorical_vars)) %>%
@@ -137,14 +147,13 @@ descriptives_numerical = describeBy(participants[numerical_vars], participants$c
   arrange(variable, condition)
 write.csv(descriptives_numerical, file = file.path(output_dir, "descriptives_numerical.csv"), row.names = FALSE)
 
-text_len = texts %>%
-  group_by(type) %>% 
-  summarise(mean_leng = mean(leng, na.rm = TRUE),
-            sd_leng = sd(leng, na.rm = TRUE))
-text_diff = aov(leng ~ type, data = texts)
-summary(text_diff)
+anova_table = lapply(numerical_vars, run_anova) %>%
+  bind_rows() %>%
+  mutate(adjusted_p.value = p.adjust(p.value, method = "bonferroni", n = length(numerical_vars)))
 
-## RRES table
+write.table(anova_table, file = file.path(output_dir, "anova_by_group.csv"), sep = ",", row.names = FALSE)
+
+## RRES
 
 RRES = participants %>%
   select(participant_id, condition) %>%
@@ -153,13 +162,85 @@ RRES = participants %>%
   dplyr::summarise(n = n(), valence = mean(valence), arousal = mean(arousal),
                    .groups = 'drop')
 
+RRES$participant_id = as.factor(RRES$participant_id)
+RRES$story_type = recode(RRES$trial_type, ANG = "TAR", HOP = "TAR", NEU = "TAR", CON = "CON")
+
+RRES.wide = RRES %>%
+  pivot_wider(id_cols = c("participant_id", "condition"),
+              names_from = c("story_type"),
+              names_sep = ".",
+              names_sort = T,
+              values_from = c("valence", "arousal"))
+
 RRES_by_valence = RRES %>% 
   summarySE(measurevar = "valence", groupvars = c("condition", "trial_type"))
 
 RRES_by_arousal = RRES %>% 
   summarySE(measurevar = "arousal", groupvars = c("condition", "trial_type"))
 
-## CET table
+### RRES: Valence ANOVA
+
+valence_anova = jmv::anovaRM(
+  data = RRES.wide,
+  rm = list(
+    list(
+      label="story type",
+      levels=c("target", "control"))),
+  rmCells = list(
+    list(
+      measure="valence.TAR",
+      cell="target"),
+    list(
+      measure="valence.CON",
+      cell="control")),
+  bs = condition,
+  effectSize = c("eta", "partEta"),
+  depLabel = "Valence",
+  rmTerms = ~ `story type`,
+  bsTerms = ~ condition,
+  postHoc = list(
+    c("story type", "condition")),
+  postHocCorr = c("none", "tukey"),
+  emMeans = ~ condition:`story type`,
+  emmTables = TRUE,
+  groupSumm = TRUE)
+
+valence_posthocs = valence_anova$postHoc [[1]]$asDF
+valence_posthocs = valence_posthocs[c(3,8,12,1,2,6),] # planned comparisons only
+valence_posthocs$p.planned = p.adjust(valence_posthocs$pnone, method = "bonferroni")
+
+## RRES: Arousal ANOVA
+
+arousal_anova = jmv::anovaRM(
+  data = RRES.wide,
+  rm = list(
+    list(
+      label="story type",
+      levels=c("target", "control"))),
+  rmCells = list(
+    list(
+      measure="arousal.TAR",
+      cell="target"),
+    list(
+      measure="arousal.CON",
+      cell="control")),
+  bs = condition,
+  effectSize = c("eta", "partEta"),
+  depLabel = "Arousal",
+  rmTerms = ~ `story type`,
+  bsTerms = ~ condition,
+  postHoc = list(
+    c("story type", "condition")),
+  postHocCorr = c("none", "tukey"),
+  emMeans = ~ condition:`story type`,
+  emmTables = TRUE,
+  groupSumm = TRUE)
+
+arousal_posthocs = arousal_anova$postHoc [[1]]$asDF
+arousal_posthocs = arousal_posthocs[c(3,8,12,1,2,6),] # planned comparisons only
+arousal_posthocs$p.planned = p.adjust(arousal_posthocs$pnone, method = "bonferroni")
+
+## CET
 
 CET_by_money = cet %>%
   drop_na(decision) %>%
@@ -175,13 +256,7 @@ CET_by_carbon = cet %>%
                    .groups = 'drop') %>%
   summarySE(measurevar="proportion", groupvars=c("carbon"))
 
-## ANOVA
-
-anova_table = lapply(numerical_vars, run_anova) %>%
-  bind_rows() %>%
-  mutate(adjusted_p.value = p.adjust(p.value, method = "bonferroni", n = length(numerical_vars)))
-
-write.table(anova_table, file = file.path(output_dir, "anova_by_group.csv"), sep = ",", row.names = FALSE)
+# Plots 
   
 ## Descriptives histograms (Figure 3)
 
