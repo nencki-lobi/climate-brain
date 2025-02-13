@@ -27,7 +27,7 @@ if (!dir.exists(output_dir)) {
 
 participants = read.table(file.path(bidsdir, "participants.tsv"), na.strings = "n/a", header = T, sep = "\t", quote = "", encoding = "UTF-8")
 participants_json = fromJSON(file.path(bidsdir, "participants.json"))
-texts = read.table(file.path(basedir, "data/stories-texts.tsv"), header = T, sep = "\t", encoding = "UTF-8")
+texts = read.table(file.path(basedir, "data/stories-texts.tsv"), header = T, sep = "\t", quote = "", encoding = "UTF-8")
 stories = read.table(file.path(basedir, "output/stories-events.tsv"), header = T, sep = "\t", quote = "", encoding = "UTF-8")
 cet = read.table(file.path(basedir, "output/cet-events.tsv"), header = T, sep = "\t", quote = "", encoding = "UTF-8")
 
@@ -38,7 +38,7 @@ participants = participants %>%
   mutate(condition = factor(condition, levels = c("ANG", "HOP", "NEU")))
 
 texts = texts %>%
-  mutate(leng = nchar(story))
+  mutate(leng = nchar(story_PL))
 
 stories = stories %>% 
   filter(trial_type != 'Q') %>% # drop `question` events
@@ -127,10 +127,10 @@ run_anova = function(variable) {
 ## Stimuli
 
 text_len = texts %>%
-  group_by(type) %>% 
+  group_by(group) %>% 
   dplyr::summarise(mean_leng = mean(leng, na.rm = TRUE),
             sd_leng = sd(leng, na.rm = TRUE))
-text_diff = aov(leng ~ type, data = texts)
+text_diff = aov(leng ~ group, data = texts)
 summary(text_diff)
 
 ## Descriptives
