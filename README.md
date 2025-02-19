@@ -8,7 +8,7 @@ Please cite the corresponding sources when using the dataset or the associated m
 
 - OpenNeuro dataset:
 
-	> Zaremba, D., Kossowski, B., Wypych, M., Jednoróg, K., Michałowski, J. M., Klöckner, C. A., Wierzba, M., & Marchewka, A. (2024) CLIMATE BRAIN - Questionnaires, tasks and the neuroimaging dataset. OpenNeuro. [Dataset] [doi:10.18112/openneuro.ds005460.v1.0.0](https://openneuro.org/datasets/ds005460)
+	> Zaremba, D., Kossowski, B., Wypych, M., Jednoróg, K., Michałowski, J. M., Klöckner, C. A., Wierzba, M., & Marchewka, A. (2025) CLIMATE BRAIN - Questionnaires, tasks and the neuroimaging dataset. OpenNeuro. [Dataset] [doi:10.18112/openneuro.ds005460.v2.0.0](https://openneuro.org/datasets/ds005460)
 
 - Preprint:
 
@@ -27,7 +27,7 @@ cd $HOME
 Download the dataset, following the instructions provided [here](https://openneuro.org/datasets/ds005460/download), e.g.:
 
 ```
-openneuro download --snapshot 1.0.0 ds005460 ds005460/
+openneuro download --snapshot 2.0.0 ds005460 ds005460/
 ```
 
 Download the code (this git repository), e.g.:
