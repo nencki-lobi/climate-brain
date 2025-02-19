@@ -163,10 +163,9 @@ RRES = participants %>%
   left_join(stories, by = "participant_id") %>%
   group_by(participant_id, condition, trial_type) %>%
   dplyr::summarise(n = n(), valence = mean(valence), arousal = mean(arousal),
-                   .groups = 'drop')
-
-RRES$participant_id = as.factor(RRES$participant_id)
-RRES$story_type = recode(RRES$trial_type, ANG = "TAR", HOP = "TAR", NEU = "TAR", CON = "CON")
+                   .groups = 'drop') %>%
+  mutate(participant_id = as.factor(participant_id)) %>%
+  mutate(story_type = recode(trial_type, ANG = "TAR", HOP = "TAR", NEU = "TAR", CON = "CON"), .after = trial_type)
 
 RRES.wide = RRES %>%
   pivot_wider(id_cols = c("participant_id", "condition"),
